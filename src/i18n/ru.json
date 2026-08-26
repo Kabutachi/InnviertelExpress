@@ -31,9 +31,8 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "О компании Innviertel Express",
-      "title": "Перевозки в Innviertel: лично и надёжно.",
-      "subtitle": "Innviertel Express — небольшая транспортная компания под личным управлением владельца, для бизнеса и частных клиентов в регионе. Один водитель, одна машина, один прямой контакт.",
+      "title": "Транспортная компания в регионе Innviertel.",
+      "subtitle": "Innviertel Express выполняет перевозки для бизнеса и частных клиентов в регионе Innviertel. Международные перевозки — по отдельному запросу.",
       "photoAlt": "Водитель Innviertel Express рядом со своим Fiat Doblo Cargo"
     },
     "numbers": {

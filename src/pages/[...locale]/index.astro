@@ -25,7 +25,6 @@ const t = getT(locale);
     <section class="hero" data-reveal="left">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow">{t('home.hero.eyebrow')}</p>
           <h1>{t('home.hero.title')}</h1>
           <p class="hero-subtitle">{t('home.hero.subtitle')}</p>
         </div>
@@ -131,27 +130,6 @@ const t = getT(locale);
     .hero-grid {
       grid-template-columns: 1.1fr 1fr;
     }
-  }
-
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: var(--text-small);
-    font-weight: 500;
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    margin-bottom: var(--space-3);
-  }
-
-  .eyebrow::before {
-    content: '';
-    width: 32px;
-    height: 4px;
-    background: var(--gradient-speed);
-    flex: none;
   }
 
   .hero-subtitle {

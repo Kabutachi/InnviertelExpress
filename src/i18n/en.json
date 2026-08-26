@@ -31,9 +31,8 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "About Innviertel Express",
-      "title": "Transport in the Innviertel, personal and dependable.",
-      "subtitle": "Innviertel Express is an owner-run small-transport company for businesses and private customers across the region. One driver, one vehicle, one direct contact.",
+      "title": "A transport company based in the Innviertel.",
+      "subtitle": "Innviertel Express handles transport for businesses and private customers in the Innviertel region. International trips are available on request.",
       "photoAlt": "The Innviertel Express driver in front of his Fiat Doblo Cargo"
     },
     "numbers": {

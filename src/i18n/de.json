@@ -31,9 +31,8 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Über Innviertel Express",
-      "title": "Transporte im Innviertel, persönlich und verlässlich.",
-      "subtitle": "Innviertel Express ist ein inhabergeführtes Kleintransportunternehmen für Firmen und Privatkunden in der Region. Ein Fahrer, ein Fahrzeug, ein direkter Ansprechpartner.",
+      "title": "Transportunternehmen im Innviertel.",
+      "subtitle": "Innviertel Express übernimmt Transporte für Firmen und Privatkunden in der Region Innviertel. Internationale Fahrten sind auf Anfrage möglich.",
       "photoAlt": "Der Fahrer von Innviertel Express vor seinem Fiat Doblo Cargo"
     },
     "numbers": {
