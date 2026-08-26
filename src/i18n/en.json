@@ -1,0 +1,209 @@
+{
+  "meta": {
+    "home": {
+      "title": "Innviertel Express — Business Transport & Courier Runs in the Innviertel",
+      "description": "Business transport, courier runs and deliveries in the Innviertel with a Fiat Doblo Cargo. Fast to reach, experienced drivers, shipments trackable."
+    }
+  },
+  "nav": {
+    "vehicle": "Vehicle",
+    "testimonials": "Testimonials",
+    "contact": "Contact"
+  },
+  "common": {
+    "brand": "Innviertel Express",
+    "whatsappCta": "Message on WhatsApp",
+    "trackingCta": "Track shipment",
+    "callCta": "Call",
+    "phoneDisplay": "+43 000 000 00 00",
+    "email": "office@innviertel-express.at",
+    "responseClaim": "Usually replies within 30 minutes (Mon–Sat, 7am–8pm)",
+    "languageSwitcherLabel": "Choose language",
+    "hintAvailable": "This page is also available in English",
+    "hintOpen": "Switch",
+    "hintDismiss": "Dismiss",
+    "skipToContent": "Skip to content"
+  },
+  "footer": {
+    "tagline": "Business transport & courier runs in the Innviertel, Upper Austria",
+    "impressumLink": "Impressum",
+    "areaNote": "Braunau am Inn · Ried im Innkreis · Schärding · Mattighofen · Altheim · Obernberg am Inn"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "About Innviertel Express",
+      "title": "Transport in the Innviertel, personal and dependable.",
+      "subtitle": "Innviertel Express is an owner-run small-transport company for businesses and private customers across the region. One driver, one vehicle, one direct contact.",
+      "photoAlt": "The Innviertel Express driver in front of his Fiat Doblo Cargo"
+    },
+    "numbers": {
+      "title": "The Van",
+      "subtitle": "Fiat Doblo Cargo — the key numbers",
+      "items": [
+        { "label": "Payload", "value": "850 kg" },
+        { "label": "Load space", "value": "4,2 m³" },
+        { "label": "Euro-pallets", "value": "2" },
+        { "label": "Response time", "value": "~30 min" }
+      ]
+    },
+    "trust": {
+      "title": "What you can count on",
+      "items": [
+        {
+          "title": "Fast & around the clock",
+          "text": "Requests are handled quickly — even outside regular office hours."
+        },
+        {
+          "title": "Shipments trackable",
+          "text": "You'll know where your shipment is right now and when it's arriving."
+        },
+        {
+          "title": "Experienced drivers",
+          "text": "Years of experience in freight transport — careful, punctual, reliable."
+        }
+      ]
+    },
+    "testimonials": {
+      "title": "What clients say",
+      "items": [
+        {
+          "quote": "Reliable, punctual and uncomplicated — exactly what our company needs.",
+          "name": "M. F.",
+          "role": "Trades business, Braunau am Inn"
+        },
+        {
+          "quote": "Short-notice request, fast reply, clean execution.",
+          "name": "S. W.",
+          "role": "Procurement, Ried im Innkreis"
+        },
+        {
+          "quote": "Our shipments always arrive on time. One point of contact, no surprises.",
+          "name": "K. A.",
+          "role": "Office management, Schärding"
+        },
+        {
+          "quote": "Professional and flexible — a dependable partner even for short-notice jobs.",
+          "name": "T. H.",
+          "role": "Retail, Mattighofen"
+        }
+      ]
+    },
+    "tracking": {
+      "title": "Track shipment",
+      "text": "Live GPS location of your shipment — this feature is being connected and will be available soon.",
+      "inputLabel": "Shipment number",
+      "inputPlaceholder": "e.g. IE-000000",
+      "submitLabel": "Track",
+      "stubNote": "Shipment tracking isn't available yet. For urgent questions about a delivery in progress, just message on WhatsApp."
+    },
+    "contact": {
+      "title": "Contact",
+      "text": "Reachable by WhatsApp, phone or email.",
+      "phoneLabel": "Phone",
+      "emailLabel": "Email"
+    }
+  },
+  "legal": {
+    "title": "Impressum",
+    "intro": "Impressum (legal notice), required under § 5 ECG and § 14 UGB. Show your business, and you've got nothing to hide.",
+    "driverNote": "Innviertel Express is run and driven personally by Andreas Huber.",
+    "fields": [
+      { "label": "Company", "value": "Andreas Huber — Innviertel Express e.U." },
+      { "label": "Registered office", "value": "Musterstraße 1, 4950 Altheim, Austria" },
+      { "label": "Trade licence (Gewerbe)", "value": "Small-transport trade / freight transport up to 2,5 t hzG" },
+      { "label": "Company register number (GISA)", "value": "00000000" },
+      { "label": "VAT number (UID)", "value": "ATU00000000" },
+      { "label": "Member", "value": "WKO Oberösterreich, Fachgruppe Güterbeförderung" },
+      { "label": "Insurance", "value": "Transport insurance, policy 000-0000000" },
+      { "label": "Supervisory authority", "value": "Bezirkshauptmannschaft Braunau am Inn" },
+      { "label": "Contact", "value": "+43 000 000 00 00 · office@innviertel-express.at" }
+    ]
+  },
+  "whatsapp": {
+    "prefill": {
+      "home": "Hi! I need something transported in the Innviertel: [what] from [place] to [place]. Can you help?"
+    }
+  },
+  "new": {
+    "meta": {
+      "title": "Innviertel Express — courier runs and business transport, day and night",
+      "description": "Business transport and courier runs — regional, Austria-wide and across the border. Direct drives with no transfer, nights and weekends too."
+    },
+    "nav": {
+      "vehicle": "The van",
+      "cases": "Situations",
+      "contact": "Contact"
+    },
+    "hero": {
+      "title": "On the road wherever it is needed.",
+      "lead": "Business transport and courier runs — regional and long-distance, nights and weekends included.",
+      "photoAlt": "An Innviertel Express driver in front of the Fiat Doblò Cargo",
+      "status": ["Austria · EU", "Direct drives", "Day & night", "GPS tracking"]
+    },
+    "vehicle": {
+      "label": "The van",
+      "title": "Fiat Doblò Cargo Maxi",
+      "text": "A panel van, not a truck. What fits is written down here, so you know before you ask.",
+      "photoAlt": "View through the open rear doors into the empty load bay of the Fiat Doblò Cargo",
+      "specs": [
+        { "label": "Payload", "value": "850 kg" },
+        { "label": "Load space", "value": "4.2 m³" },
+        { "label": "Euro pallets", "value": "2" }
+      ],
+      "dims": {
+        "length": "Length",
+        "width": "Width",
+        "height": "Height",
+        "lengthValue": "2170 mm",
+        "widthValue": "1230 mm",
+        "heightValue": "1220 mm",
+        "widthNote": "between the wheel arches"
+      },
+      "note": "Dimensions rounded. If it is tight, send a photo — we will tell you whether it goes in."
+    },
+    "cases": {
+      "label": "Situations",
+      "title": "When it gets tight",
+      "items": [
+        {
+          "situation": "02:00. The line has stopped.",
+          "answer": "Night and weekend runs are normal here, not an exception. Message on WhatsApp, usually answered within 30 minutes."
+        },
+        {
+          "situation": "600 km, and it has to be there by morning.",
+          "answer": "Direct drive, no transfer. The shipment stays in the same vehicle, no depot in between."
+        },
+        {
+          "situation": "Where is the shipment right now?",
+          "answer": "GPS in the van. Location and estimated arrival on request, at any hour."
+        },
+        {
+          "situation": "It must not shift.",
+          "answer": "Straps, blankets and edge protectors are on board. Transport insurance is in place."
+        }
+      ]
+    },
+    "voices": {
+      "title": "Voices",
+      "note": "Placeholder — real customer quotes to follow.",
+      "items": [
+        { "quote": "Placeholder for a real customer quote.", "name": "Customer name", "role": "Industry, town" },
+        { "quote": "Placeholder for a real customer quote.", "name": "Customer name", "role": "Industry, town" },
+        { "quote": "Placeholder for a real customer quote.", "name": "Customer name", "role": "Industry, town" }
+      ]
+    },
+    "tracking": {
+      "title": "Track a shipment",
+      "text": "The van has GPS. Lookup by shipment number is being connected; until then a short message does the job."
+    },
+    "contact": {
+      "title": "Contact",
+      "text": "Three ways, one is enough.",
+      "claim": "Reachable Mon–Sun. Usually answered within 30 minutes."
+    },
+    "footer": {
+      "tagline": "Business transport and courier runs — regional and long-distance."
+    },
+    "compare": "Old version"
+  }
+}

@@ -1,0 +1,157 @@
+---
+import '@fontsource/fira-sans-condensed/700.css';
+import '@fontsource/fira-sans-condensed/700-italic.css';
+import '@fontsource/source-sans-3/400.css';
+import '@fontsource/source-sans-3/600.css';
+import '@fontsource/jetbrains-mono/500.css';
+import '@fontsource/jetbrains-mono/700.css';
+import '../styles/tokens.css';
+import '../styles/global.css';
+import { getT, locales, localizePath, type Locale, type PageId } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+  page: PageId;
+}
+
+const { locale, page } = Astro.props;
+const t = getT(locale);
+
+const site = Astro.site ?? new URL('https://innviertel-express.at');
+const absolute = (l: Locale) => new URL(localizePath(l, page), site).href;
+
+const ogLocales: Record<Locale, string> = { de: 'de_AT', en: 'en_US', ru: 'ru_RU', uk: 'uk_UA' };
+
+// Hint bar data: each locale's "also available" line, written in its own language.
+const hintData = Object.fromEntries(
+  locales.map((l) => {
+    const lt = getT(l);
+    return [l, { text: lt('common.hintAvailable'), open: lt('common.hintOpen'), dismiss: lt('common.hintDismiss'), href: localizePath(l, page) }];
+  })
+);
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f2ea" />
+    <title>{t(`meta.${page}.title`)}</title>
+    <meta name="description" content={t(`meta.${page}.description`)} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={absolute(locale)} />
+    {locales.map((l) => <link rel="alternate" hreflang={l} href={absolute(l)} />)}
+    <link rel="alternate" hreflang="x-default" href={absolute('de')} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={t('common.brand')} />
+    <meta property="og:title" content={t(`meta.${page}.title`)} />
+    <meta property="og:description" content={t(`meta.${page}.description`)} />
+    <meta property="og:url" content={absolute(locale)} />
+    <meta property="og:locale" content={ogLocales[locale]} />
+    {locales.filter((l) => l !== locale).map((l) => <meta property="og:locale:alternate" content={ogLocales[l]} />)}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t('common.skipToContent')}</a>
+    <div
+      id="locale-hint"
+      class="locale-hint"
+      hidden
+      data-current-locale={locale}
+      data-hints={JSON.stringify(hintData)}
+    >
+      <p class="locale-hint-text"></p>
+      <a class="locale-hint-open" href="#"></a>
+      <button class="locale-hint-dismiss" type="button"></button>
+    </div>
+    <slot />
+
+    <script>
+      // Persist explicit language choices; never auto-redirect.
+      const CHOICE_KEY = 'ie-locale';
+      const DISMISS_KEY = 'ie-locale-hint-dismissed';
+
+      document.addEventListener('click', (event) => {
+        const link = (event.target as Element).closest?.('[data-locale-choice]');
+        if (link) localStorage.setItem(CHOICE_KEY, link.getAttribute('data-locale-choice') ?? '');
+      });
+
+      const hint = document.getElementById('locale-hint');
+      if (hint && !localStorage.getItem(CHOICE_KEY) && !localStorage.getItem(DISMISS_KEY)) {
+        const current = hint.dataset.currentLocale;
+        const hints = JSON.parse(hint.dataset.hints ?? '{}');
+        const browser = (navigator.language || '').slice(0, 2).toLowerCase();
+        if (browser !== current && hints[browser]) {
+          const data = hints[browser];
+          hint.querySelector('.locale-hint-text')!.textContent = data.text;
+          const open = hint.querySelector('.locale-hint-open') as HTMLAnchorElement;
+          open.textContent = data.open;
+          open.href = data.href;
+          open.setAttribute('data-locale-choice', browser);
+          const dismiss = hint.querySelector('.locale-hint-dismiss') as HTMLButtonElement;
+          dismiss.textContent = data.dismiss;
+          dismiss.addEventListener('click', () => {
+            localStorage.setItem(DISMISS_KEY, '1');
+            hint.hidden = true;
+          });
+          hint.hidden = false;
+        }
+      }
+    </script>
+
+    <style>
+      .skip-link {
+        position: absolute;
+        left: -999px;
+        top: 0;
+        background: var(--color-ink);
+        color: var(--color-bg);
+        padding: var(--space-2) var(--space-3);
+        z-index: var(--z-hint);
+      }
+
+      .skip-link:focus-visible {
+        left: 0;
+      }
+
+      .locale-hint {
+        position: sticky;
+        top: 0;
+        z-index: var(--z-hint);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--space-2) var(--space-3);
+        padding: var(--space-2) var(--space-4);
+        background: var(--color-ink);
+        color: var(--color-bg);
+        font-size: var(--text-small);
+      }
+
+      .locale-hint[hidden] {
+        display: none;
+      }
+
+      .locale-hint-text {
+        margin: 0;
+        opacity: 1;
+      }
+
+      .locale-hint-open {
+        color: inherit;
+        font-weight: 600;
+        min-height: auto;
+      }
+
+      .locale-hint-dismiss {
+        margin-inline-start: auto;
+        background: none;
+        border: 1px solid color-mix(in srgb, var(--color-bg) 40%, transparent);
+        border-radius: var(--radius-s);
+        color: inherit;
+        padding: var(--space-1) var(--space-2);
+        min-height: var(--touch-target);
+      }
+    </style>
+  </body>
+</html>

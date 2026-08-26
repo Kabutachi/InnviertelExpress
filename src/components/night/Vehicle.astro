@@ -1,0 +1,176 @@
+---
+import { Image } from 'astro:assets';
+import cargoBay from '../../assets/cargo-bay.png';
+import { getT, getRaw, type Locale } from '../../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getT(locale);
+
+// TODO(client): confirm every figure against the Zulassungsschein before launch.
+// These are the manufacturer's rounded values for the Doblò Cargo Maxi and are
+// presented as rounded on the page, but they have not been checked against the
+// actual vehicle's papers.
+const specs = getRaw<{ label: string; value: string }[]>(locale, 'new.vehicle.specs');
+const d = getRaw<Record<string, string>>(locale, 'new.vehicle.dims');
+
+// Length, width and height sit in the same mono list as the rest. A schematic
+// side elevation was tried here first and thrown out: a drawn van is a worse
+// answer to "will it fit" than a photograph of the actual empty bay.
+const dimensions = [
+  { label: d.length, value: d.lengthValue, note: null },
+  { label: d.width, value: d.widthValue, note: d.widthNote },
+  { label: d.height, value: d.heightValue, note: null },
+];
+---
+
+<section id="fahrzeug" class="section">
+  <div class="container">
+    <p class="label">{t('new.vehicle.label')}</p>
+
+    <div class="vehicle-grid">
+      <figure class="bay">
+        <Image
+          src={cargoBay}
+          alt={t('new.vehicle.photoAlt')}
+          widths={[380, 560, 760, 1085]}
+          sizes="(min-width: 1000px) 34vw, (min-width: 640px) 60vw, 92vw"
+          loading="lazy"
+        />
+        <span class="tint" aria-hidden="true"></span>
+      </figure>
+
+      <div class="vehicle-copy">
+        <h2>{t('new.vehicle.title')}</h2>
+        <p class="vehicle-text">{t('new.vehicle.text')}</p>
+
+        <dl class="specs">
+          {
+            specs.map((spec) => (
+              <div class="spec">
+                <dt>{spec.label}</dt>
+                <dd class="figure">{spec.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+
+        <dl class="specs specs-dims">
+          {
+            dimensions.map((dim) => (
+              <div class="spec">
+                <dt>{dim.label}</dt>
+                <dd class="figure">{dim.value}</dd>
+                {dim.note && <p class="spec-note">{dim.note}</p>}
+              </div>
+            ))
+          }
+        </dl>
+
+        <p class="note muted">{t('new.vehicle.note')}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .vehicle-grid {
+    display: grid;
+    gap: var(--space-5);
+    margin-top: var(--space-4);
+    align-items: center;
+  }
+
+  .bay {
+    position: relative;
+    margin: 0;
+    /* Same edge treatment as the hero: the photograph fades into the night
+       ground rather than sitting in a lit box on top of it. */
+    -webkit-mask-image: radial-gradient(
+      72% 66% at 50% 50%,
+      #000 26%,
+      rgba(0, 0, 0, 0.45) 62%,
+      transparent 94%
+    );
+    mask-image: radial-gradient(
+      72% 66% at 50% 50%,
+      #000 26%,
+      rgba(0, 0, 0, 0.45) 62%,
+      transparent 94%
+    );
+  }
+
+  /* Graded down, not hidden. This photograph is evidence — it answers "will my
+     pallet go in" better than any number on the page, so it stays legible. */
+  .bay :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: brightness(0.82) saturate(0.62) contrast(1.02);
+  }
+
+  .tint {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(200deg, #16233d 0%, #0b0e13 90%);
+    opacity: 0.26;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+
+  .vehicle-text {
+    margin-top: var(--space-3);
+    max-width: 44ch;
+  }
+
+  .specs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    gap: var(--space-4) var(--space-3);
+    margin-top: var(--space-5);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--edge);
+  }
+
+  .specs-dims {
+    margin-top: var(--space-4);
+  }
+
+  .spec dt {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    /* Single compounds like ВАНТАЖОПІДЙОМНІСТЬ are wider than a grid cell at
+       375px and have no break opportunity of their own. */
+    overflow-wrap: anywhere;
+  }
+
+  .spec dd {
+    margin: var(--space-2) 0 0;
+    font-size: 1.375rem;
+  }
+
+  .spec-note {
+    margin-top: var(--space-1);
+    font-size: var(--text-small);
+    color: var(--muted);
+  }
+
+  .note {
+    margin-top: var(--space-4);
+    font-size: var(--text-small);
+    max-width: 48ch;
+  }
+
+  @media (min-width: 1000px) {
+    .vehicle-grid {
+      grid-template-columns: 0.85fr 1fr;
+      gap: var(--space-6);
+    }
+  }
+</style>

@@ -1,0 +1,76 @@
+---
+import { getT, getRaw, type Locale } from '../../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getT(locale);
+
+const items = getRaw<{ situation: string; answer: string }[]>(locale, 'new.cases.items');
+---
+
+<section id="situationen" class="section">
+  <div class="container">
+    <p class="label">{t('new.cases.label')}</p>
+    <h2 class="cases-title">{t('new.cases.title')}</h2>
+
+    <ul class="cases">
+      {
+        items.map((item) => (
+          <li class="case lit">
+            <h3>{item.situation}</h3>
+            <p>{item.answer}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .cases-title {
+    margin-top: var(--space-3);
+  }
+
+  .cases {
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: 1fr;
+    list-style: none;
+    margin: var(--space-5) 0 0;
+    padding: 0;
+  }
+
+  .case {
+    padding: var(--space-5) var(--space-4) var(--space-4);
+  }
+
+  /* The customer's own sentence, in their voice, set as the heading — the answer
+     underneath is deliberately flatter and shorter than the question. */
+  .case h3 {
+    font-size: 1.25rem;
+    line-height: 1.25;
+    color: var(--hi);
+  }
+
+  .case p {
+    margin-top: var(--space-3);
+    color: var(--body);
+    font-size: var(--text-small);
+    line-height: 1.6;
+    max-width: 42ch;
+  }
+
+  @media (min-width: 720px) {
+    .cases {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+    }
+
+    .case {
+      padding: var(--space-5);
+    }
+  }
+</style>

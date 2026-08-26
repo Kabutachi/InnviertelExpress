@@ -1,0 +1,90 @@
+---
+import { Image } from 'astro:assets';
+import logoSrc from '../../assets/logo-night.png';
+import { getT, telHref, type Locale } from '../../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getT(locale);
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <Image src={logoSrc} alt={t('common.brand')} width={180} height={51} densities={[1, 2]} />
+      <p class="tagline">{t('new.footer.tagline')}</p>
+      <p class="area">{t('footer.areaNote')}</p>
+    </div>
+
+    <nav class="footer-nav" aria-label={t('new.nav.contact')}>
+      <a class="link" href="#fahrzeug">{t('new.nav.vehicle')}</a>
+      <a class="link" href="#situationen">{t('new.nav.cases')}</a>
+      <a class="link" href="#tracking">{t('common.trackingCta')}</a>
+      <a class="link" href="#impressum">{t('footer.impressumLink')}</a>
+    </nav>
+
+    <div class="footer-contact">
+      <a class="link" href={telHref}>{t('common.phoneDisplay')}</a>
+      <a class="link" href={`mailto:${t('common.email')}`}>{t('common.email')}</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--edge);
+    padding-block: var(--space-5) var(--space-6);
+    margin-top: var(--space-5);
+  }
+
+  .footer-inner {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .footer-brand :global(img) {
+    height: 30px;
+    width: auto;
+  }
+
+  .tagline {
+    margin-top: var(--space-3);
+    font-size: var(--text-small);
+    max-width: 34ch;
+  }
+
+  .area {
+    margin-top: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    line-height: 1.8;
+    color: var(--muted);
+  }
+
+  .footer-nav,
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+    font-size: var(--text-small);
+  }
+
+  .footer-nav a,
+  .footer-contact a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch-target);
+    color: var(--body);
+  }
+
+  @media (min-width: 860px) {
+    .footer-inner {
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: var(--space-6);
+    }
+  }
+</style>

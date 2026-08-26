@@ -1,0 +1,111 @@
+---
+import { getT, telHref, type Locale, type PageId } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+  page: PageId;
+}
+
+const { locale } = Astro.props;
+const t = getT(locale);
+
+const navItems = [
+  { href: '#fahrzeug', label: t('nav.vehicle') },
+  { href: '#referenzen', label: t('nav.testimonials') },
+  { href: '#kontakt', label: t('nav.contact') },
+  { href: '#impressum', label: t('footer.impressumLink') },
+];
+---
+
+<footer class="site-footer">
+  <div class="footer-strip" aria-hidden="true"></div>
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <p class="footer-brand-name">{t('common.brand')}</p>
+      <p class="footer-tagline">{t('footer.tagline')}</p>
+      <p class="footer-area">{t('footer.areaNote')}</p>
+    </div>
+    <nav class="footer-nav">
+      {
+        navItems.map((item) => (
+          <a class="footer-link link-tick" href={item.href}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="footer-contact">
+      <a class="footer-link link-tick" href={`mailto:${t('common.email')}`}>
+        {t('common.email')}
+      </a>
+      <a class="footer-link link-tick" href={telHref}>
+        {t('common.callCta')} · {t('common.phoneDisplay')}
+      </a>
+      <p class="footer-claim">{t('common.responseClaim')}</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-ink);
+    color: var(--color-bg);
+    margin-top: var(--space-6);
+  }
+
+  .footer-strip {
+    height: 4px;
+    background: var(--gradient-speed);
+  }
+
+  .footer-grid {
+    display: grid;
+    gap: var(--space-5);
+    padding-block: var(--space-6);
+  }
+
+  @media (min-width: 820px) {
+    .footer-grid {
+      grid-template-columns: 1.4fr 1fr 1.2fr;
+    }
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+  .footer-tagline {
+    opacity: var(--opacity-muted);
+    margin-top: var(--space-2);
+  }
+
+  .footer-area {
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+    opacity: var(--opacity-muted);
+    margin-top: var(--space-3);
+  }
+
+  .footer-nav,
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch-target);
+    color: inherit;
+  }
+
+  .footer-claim {
+    font-size: var(--text-small);
+    opacity: var(--opacity-muted);
+    margin-top: var(--space-2);
+  }
+</style>

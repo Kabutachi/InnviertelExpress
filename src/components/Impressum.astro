@@ -1,0 +1,106 @@
+---
+import { getT, getRaw, type Locale } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getT(locale);
+
+const fields = getRaw<{ label: string; value: string }[]>(locale, 'legal.fields');
+const fieldsWithFlags = fields.map((field) => ({ ...field, isFigure: /\d/.test(field.value) }));
+---
+
+<section id="impressum" class="section">
+  <div class="container impressum-container">
+    <div class="freight-card">
+      <h2>{t('legal.title')}</h2>
+      <p class="intro">{t('legal.intro')}</p>
+      <p class="driver-note muted">{t('legal.driverNote')}</p>
+      <dl class="fields">
+        {
+          fieldsWithFlags.map((field) => (
+            <div class="field-row">
+              <dt class="muted">{field.label}</dt>
+              <dd class:list={[{ figure: field.isFigure }]}>{field.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</section>
+
+<style>
+  .impressum-container {
+    max-width: 46rem;
+  }
+
+  .freight-card {
+    position: relative;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-m);
+    box-shadow: var(--shadow-crate-lift);
+    padding: var(--space-5);
+    overflow: hidden;
+  }
+
+  .freight-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-speed);
+  }
+
+  .intro {
+    font-size: var(--text-body);
+    margin-top: var(--space-3);
+  }
+
+  .driver-note {
+    font-size: var(--text-small);
+    margin-top: var(--space-2);
+  }
+
+  .fields {
+    margin-top: var(--space-4);
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+    padding-block: var(--space-2);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .field-row:last-child {
+    border-bottom: none;
+  }
+
+  .field-row dt {
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .field-row dd {
+    margin: 0;
+    color: var(--color-text);
+    font-size: var(--text-body);
+  }
+
+  @media (min-width: 720px) {
+    .field-row {
+      grid-template-columns: 1fr 2fr;
+      gap: var(--space-3);
+      align-items: baseline;
+    }
+  }
+</style>

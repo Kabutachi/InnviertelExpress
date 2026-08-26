@@ -1,0 +1,76 @@
+---
+import { getT, locales, localizePath, type Locale, type PageId } from '../../i18n/config';
+
+interface Props {
+  locale: Locale;
+  page: PageId;
+}
+
+const { locale, page } = Astro.props;
+const t = getT(locale);
+
+const nativeNames: Record<Locale, string> = {
+  de: 'Deutsch',
+  en: 'English',
+  ru: 'Русский',
+  uk: 'Українська',
+};
+---
+
+<nav class="language-switcher" aria-label={t('common.languageSwitcherLabel')}>
+  {
+    locales.map((l) => (
+      <a
+        href={localizePath(l, page)}
+        lang={l}
+        hreflang={l}
+        data-locale-choice={l}
+        aria-current={l === locale ? 'page' : undefined}
+        aria-label={nativeNames[l]}
+        class:list={['language-switcher-item', { active: l === locale }]}
+      >
+        {l.toUpperCase()}
+      </a>
+    ))
+  }
+</nav>
+
+<style>
+  .language-switcher {
+    display: flex;
+  }
+
+  .language-switcher-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.25rem;
+    min-height: var(--touch-target);
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    color: var(--muted);
+    position: relative;
+    transition: color 180ms ease;
+  }
+
+  .language-switcher-item:hover {
+    color: var(--hi);
+  }
+
+  .language-switcher-item.active {
+    color: var(--hi);
+  }
+
+  .language-switcher-item.active::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 8px;
+    width: 1.125rem;
+    height: 2px;
+    background: var(--gradient-speed);
+  }
+</style>

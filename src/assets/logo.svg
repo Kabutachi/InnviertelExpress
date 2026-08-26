@@ -1,0 +1,21 @@
+<svg viewBox="0 0 720 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Innviertel Express">
+  <!-- PLACEHOLDER LOGO — reconstruction from the brief's description.
+       Replace with the client's real logo (request SVG). See HANDOFF.md. -->
+  <defs>
+    <linearGradient id="speed-gradient" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c22410"/>
+      <stop offset="0.55" stop-color="#e85312"/>
+      <stop offset="1" stop-color="#f2a31b"/>
+    </linearGradient>
+  </defs>
+  <!-- speed lines trailing the letterforms -->
+  <g transform="skewX(-12)">
+    <rect x="30" y="22" width="118" height="10" rx="5" fill="url(#speed-gradient)"/>
+    <rect x="10" y="42" width="150" height="10" rx="5" fill="url(#speed-gradient)" opacity="0.75"/>
+    <rect x="44" y="62" width="96" height="10" rx="5" fill="url(#speed-gradient)" opacity="0.5"/>
+  </g>
+  <text x="185" y="62" font-family="'Fira Sans Condensed','Arial Narrow',sans-serif" font-style="italic"
+        font-weight="800" font-size="56" letter-spacing="1" fill="#191511">INNVIERTEL</text>
+  <text x="185" y="108" font-family="'Fira Sans Condensed','Arial Narrow',sans-serif" font-style="italic"
+        font-weight="800" font-size="44" letter-spacing="10" fill="url(#speed-gradient)">EXPRESS</text>
+</svg>

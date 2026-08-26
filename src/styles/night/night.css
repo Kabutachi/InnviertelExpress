@@ -1,0 +1,253 @@
+/* Global styles — Variant C "NACHTSCHICHT". Loaded only by NightLayout.astro. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--night-0);
+}
+
+body {
+  background: var(--night-0);
+  color: var(--body);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  color: var(--hi);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--text-h1);
+  font-weight: 700;
+  line-height: 1.06;
+}
+
+h2 {
+  font-size: var(--text-h2);
+  font-weight: 600;
+}
+
+h3 {
+  font-size: var(--text-h3);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--night-0);
+}
+
+.container {
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+.section {
+  padding-block: var(--space-6);
+}
+
+/* ---------------------------------------------------------------------------
+   THE LIGHT
+
+   There is one light source on this page. The page ground (--night-0) is
+   opaque, so the light is invisible against it; it only shows where a surface
+   is there to catch it.
+
+   The trick is `background-attachment: fixed`: it anchors the radial gradient
+   to the viewport instead of to the element, so a single light passes through
+   every .lit box at once, clipped to each box, with no per-element JS and no
+   rect bookkeeping. --beam-x / --beam-y are written once, on <html>.
+
+   Two layers per surface:
+     ::before  the wash falling inside the card
+     ::after   retroreflective contour marking on the border — the red/white
+               tape EU trucks are required to carry. Invisible until the beam
+               reaches it, then it lights up.
+
+   Both are decorative and pointer-events: none. Nothing here is load-bearing
+   for legibility — every text colour clears 4.5:1 with the light off.
+   --------------------------------------------------------------------------- */
+
+.lit {
+  position: relative;
+  /* Contains the negative-z wash so it cannot fall behind the page ground. */
+  isolation: isolate;
+  background-color: var(--night-1);
+  /* Static fallback sheen for touch devices, which never get the beam. */
+  background-image: linear-gradient(180deg, rgb(var(--beam) / 0.05), transparent 45%);
+  border: 1px solid var(--edge);
+  border-radius: var(--radius-m);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lit::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1; /* above the card's own background, below its content */
+    border-radius: inherit;
+    pointer-events: none;
+    background-image: radial-gradient(
+      520px circle at var(--beam-x) var(--beam-y),
+      rgb(var(--beam) / 0.16),
+      rgb(var(--beam) / 0.05) 38%,
+      transparent 62%
+    );
+    background-attachment: fixed;
+  }
+
+  /* inset:-1px is measured from the padding box, so with a 1px border it lands
+     exactly on the border ring. padding + mask-composite carves out the middle. */
+  .lit::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    z-index: 2;
+    border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    background-image: radial-gradient(
+      340px circle at var(--beam-x) var(--beam-y),
+      var(--gold),
+      var(--orange) 42%,
+      transparent 62%
+    );
+    background-attachment: fixed;
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Utilities
+   --------------------------------------------------------------------------- */
+
+/* Section eyebrow: mono, uppercase, with a short gradient tick — the one place
+   besides the CTA and the logo where the brand gradient is spent. */
+.label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.label::before {
+  content: '';
+  width: 28px;
+  height: 3px;
+  flex: none;
+  background: var(--gradient-speed);
+}
+
+.figure {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--hi);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.lede {
+  font-size: 1.1875rem;
+  line-height: 1.55;
+  color: var(--body);
+}
+
+/* Quiet inline link: underline is always there, it just warms up on hover.
+   No sweeping animations — the beam is the only moving light on this page. */
+.link {
+  text-decoration: none;
+  border-bottom: 1px solid var(--edge);
+  transition: border-color 180ms ease, color 180ms ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--hi);
+  border-bottom-color: var(--gold);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

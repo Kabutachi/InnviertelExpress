@@ -1,0 +1,98 @@
+---
+import { getT, getRaw, type Locale } from '../../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getT(locale);
+
+// Legal copy is shared with the original design — it is a legal disclosure, not
+// marketing, so there was nothing to rewrite.
+// TODO(client): every value here is still a placeholder. Real GISA, UID, seat,
+// insurance policy and phone number are required before this page goes live.
+const fields = getRaw<{ label: string; value: string }[]>(locale, 'legal.fields');
+const fieldsWithFlags = fields.map((field) => ({ ...field, isFigure: /\d/.test(field.value) }));
+---
+
+<section id="impressum" class="section">
+  <div class="container impressum-container">
+    <div class="freight lit">
+      <p class="label">{t('legal.title')}</p>
+      <p class="intro">{t('legal.intro')}</p>
+      <p class="driver-note muted">{t('legal.driverNote')}</p>
+      <dl class="fields">
+        {
+          fieldsWithFlags.map((field) => (
+            <div class="field-row">
+              <dt>{field.label}</dt>
+              <dd class:list={[{ figure: field.isFigure }]}>{field.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+  </div>
+</section>
+
+<style>
+  .impressum-container {
+    max-width: 48rem;
+  }
+
+  .freight {
+    padding: var(--space-5);
+  }
+
+  .intro {
+    margin-top: var(--space-4);
+    font-size: var(--text-small);
+    max-width: 52ch;
+  }
+
+  .driver-note {
+    font-size: var(--text-small);
+    margin-top: var(--space-2);
+  }
+
+  .fields {
+    margin-top: var(--space-4);
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+    padding-block: var(--space-3);
+    border-top: 1px solid var(--edge);
+  }
+
+  .field-row dt {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    overflow-wrap: anywhere;
+  }
+
+  .field-row dd {
+    margin: 0;
+    color: var(--body);
+    font-size: var(--text-small);
+    overflow-wrap: anywhere;
+  }
+
+  .field-row dd.figure {
+    font-size: var(--text-small);
+  }
+
+  @media (min-width: 720px) {
+    .field-row {
+      grid-template-columns: 1fr 2fr;
+      gap: var(--space-3);
+      align-items: baseline;
+    }
+  }
+</style>

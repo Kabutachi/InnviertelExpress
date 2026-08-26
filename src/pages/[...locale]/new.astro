@@ -1,0 +1,152 @@
+---
+import NightLayout from '../../layouts/NightLayout.astro';
+import Header from '../../components/night/Header.astro';
+import Hero from '../../components/night/Hero.astro';
+import Vehicle from '../../components/night/Vehicle.astro';
+import PainPoints from '../../components/night/PainPoints.astro';
+import Testimonials from '../../components/night/Testimonials.astro';
+import Tracking from '../../components/night/Tracking.astro';
+import Impressum from '../../components/night/Impressum.astro';
+import Footer from '../../components/night/Footer.astro';
+import { getT, whatsappHref, telHref, localizePath, getStaticLocaleParams, resolveLocale } from '../../i18n/config';
+
+export function getStaticPaths() {
+  return getStaticLocaleParams();
+}
+
+const locale = resolveLocale(Astro.params.locale);
+const t = getT(locale);
+
+const whatsappIcon =
+  'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.198.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12.04 2C6.577 2 2.13 6.447 2.13 11.91c0 2.1.55 4.075 1.5 5.775l-1.59 5.815 5.95-1.56a9.87 9.87 0 0 0 4.03.86h.005c5.463 0 9.91-4.447 9.91-9.91 0-2.646-1.03-5.135-2.9-7.005A9.86 9.86 0 0 0 12.04 2Zm0 18.008h-.004a8.29 8.29 0 0 1-4.198-1.148l-.301-.179-3.117.817.832-3.037-.196-.312a8.267 8.267 0 0 1-1.267-4.407c0-4.57 3.72-8.29 8.29-8.29 2.216 0 4.298.863 5.865 2.432a8.243 8.243 0 0 1 2.427 5.868c0 4.57-3.72 8.256-8.331 8.256Z';
+---
+
+<NightLayout locale={locale} page="new">
+  <Header locale={locale} page="new" />
+
+  <main id="main">
+    <Hero locale={locale} />
+    <Vehicle locale={locale} />
+    <PainPoints locale={locale} />
+    <Testimonials locale={locale} />
+    <Tracking locale={locale} />
+
+    <section id="kontakt" class="section">
+      <div class="container">
+        <p class="label">{t('new.contact.title')}</p>
+        <h2 class="contact-title">{t('new.contact.text')}</h2>
+
+        <div class="contact-grid">
+          <a class="contact lit" href={whatsappHref(locale)} rel="noopener">
+            <svg class="contact-icon wa" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+              <path d={whatsappIcon}></path>
+            </svg>
+            <span class="contact-method">WhatsApp</span>
+            <span class="contact-value">{t('common.whatsappCta')}</span>
+          </a>
+
+          <a class="contact lit" href={telHref}>
+            <svg class="contact-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"></path>
+            </svg>
+            <span class="contact-method">{t('home.contact.phoneLabel')}</span>
+            <span class="contact-value figure">{t('common.phoneDisplay')}</span>
+          </a>
+
+          <a class="contact lit" href={`mailto:${t('common.email')}`}>
+            <svg class="contact-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+              <path d="m3 7 9 6 9-6"></path>
+            </svg>
+            <span class="contact-method">{t('home.contact.emailLabel')}</span>
+            <span class="contact-value">{t('common.email')}</span>
+          </a>
+        </div>
+
+        <p class="contact-claim muted">{t('new.contact.claim')}</p>
+      </div>
+    </section>
+
+    <Impressum locale={locale} />
+  </main>
+
+  <Footer locale={locale} />
+
+  {/* TODO(client): temporary A/B switch. Remove once a design is chosen. */}
+  <a class="compare" href={localizePath(locale, 'home')}>{t('new.compare')}</a>
+</NightLayout>
+
+<style>
+  .contact-title {
+    margin-top: var(--space-3);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+
+  .contact {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-4);
+    text-decoration: none;
+    color: var(--hi);
+  }
+
+  .contact-icon {
+    color: var(--muted);
+    margin-bottom: var(--space-3);
+  }
+
+  .contact-icon.wa {
+    color: var(--whatsapp);
+  }
+
+  .contact-method {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .contact-value {
+    color: var(--hi);
+    font-size: var(--text-small);
+    overflow-wrap: anywhere;
+  }
+
+  .contact-claim {
+    margin-top: var(--space-4);
+    font-size: var(--text-small);
+  }
+
+  .compare {
+    position: fixed;
+    left: var(--space-3);
+    bottom: var(--space-3);
+    z-index: var(--z-header);
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    padding-inline: var(--space-3);
+    border: 1px dashed var(--edge);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--night-0) 85%, transparent);
+    backdrop-filter: blur(6px);
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    text-decoration: none;
+  }
+
+  .compare:hover,
+  .compare:focus-visible {
+    color: var(--hi);
+    border-color: var(--muted);
+  }
+</style>

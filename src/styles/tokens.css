@@ -1,0 +1,56 @@
+/* Design tokens — Variant B "Lademeter" (see DESIGN.md) */
+:root {
+  /* Color */
+  --color-bg: #f5f2ea;
+  --color-surface: #ffffff;
+  --color-ink: #191511;
+  --color-accent-1: #c22410;
+  --color-accent-2: #ef8a0e;
+  --color-text: #3d372e;
+  --color-text-muted: #71685a;
+  --color-border: #dfd7c7;
+  --color-focus: #c22410;
+  --color-whatsapp: #1faa4f;
+
+  /* The logo gradient — reserved for the CTA, the logo, and measure ticks */
+  --gradient-speed: linear-gradient(98deg, #c22410 0%, #e85312 55%, #f2a31b 100%);
+
+  /* Typography */
+  --font-display: 'Fira Sans Condensed', 'Arial Narrow', sans-serif;
+  --font-body: 'Source Sans 3', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', Consolas, monospace;
+
+  --text-h1: clamp(2.5rem, 6vw, 4.25rem);
+  --text-h2: clamp(1.75rem, 3.5vw, 2.5rem);
+  --text-h3: 1.25rem;
+  --text-body: 1.0625rem;
+  --text-small: 0.875rem;
+  --text-figure: clamp(1.75rem, 3vw, 2.5rem);
+
+  /* Opacity hierarchy: 100% headlines+CTA, 70% body, 50% specs/meta */
+  --opacity-body: 0.92;
+  --opacity-muted: 0.75;
+
+  /* Space */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+  --space-7: 6rem;
+
+  /* Shape + depth (single technique: hard offset shadow) */
+  --radius-s: 6px;
+  --radius-m: 10px;
+  --shadow-crate: 4px 4px 0 rgba(25, 21, 17, 0.12);
+  --shadow-crate-lift: 6px 6px 0 rgba(25, 21, 17, 0.16);
+
+  /* Z-scale */
+  --z-header: 30;
+  --z-sticky-cta: 40;
+  --z-hint: 50;
+
+  --container-max: 72rem;
+  --touch-target: 44px;
+}

@@ -1,0 +1,75 @@
+/* Design tokens — Variant C "NACHTSCHICHT" (see DESIGN.md).
+   Scoped to the /new route via NightLayout.astro. The light-ground tokens in
+   ../tokens.css still drive the original design at / and are untouched. */
+:root {
+  /* Ground. Deliberately blue-black, not neutral: the warm logo gradient has to
+     read as sodium light against it, and a neutral #111 would make it read as
+     "generic dark theme". This layer is opaque — it is what blocks the beam. */
+  --night-0: #0b0e13;
+  --night-1: #121722;
+  --night-2: #1a2130;
+  --edge: #262e3d;
+
+  /* Text. Cool greys against warm accents. All three clear 4.5:1 on --night-0
+     with the beam off; nothing relies on the light to be legible. */
+  --hi: #f3f0e9; /* headlines, hi-vis warm white  14.9:1 */
+  --body: #b9c0cc; /* body                          9.4:1 */
+  --muted: #7c8494; /* labels, metadata              5.2:1 */
+
+  /* The logo gradient, lifted verbatim from the real logo. The only saturated
+     colour on the page — spent almost nowhere so it always wins. */
+  --red: #c22410;
+  --orange: #e85312;
+  --gold: #f2a31b;
+  --gradient-speed: linear-gradient(98deg, #c22410 0%, #e85312 55%, #f2a31b 100%);
+
+  /* The beam. An RGB triplet rather than a colour so alpha can be varied at
+     each surface: rgb(var(--beam) / .16). Sodium street-lamp warm. */
+  --beam: 255 196 107;
+
+  --whatsapp: #1faa4f;
+  --color-focus: #f2a31b; /* #c22410 is too dark to see against --night-0 */
+
+  /* Type. A full break from the light design's Fira Sans Condensed / Source
+     Sans 3 / JetBrains Mono. All three carry Cyrillic for ru/uk — verified in
+     node_modules before use, not assumed. */
+  --font-display: 'Unbounded', 'Arial Black', 'Segoe UI', sans-serif;
+  --font-body: 'Golos Text', 'Segoe UI', sans-serif;
+  --font-mono: 'Martian Mono', 'JetBrains Mono', Consolas, monospace;
+
+  /* Unbounded is a wide face and German compounds are long, so h1 tops out
+     lower than the light design's 4.25rem. Body runs bigger than the light
+     design: light-on-dark needs the extra size to survive daylight phone use. */
+  --text-h1: clamp(2rem, 4.2vw, 3.5rem);
+  --text-h2: clamp(1.5rem, 2.8vw, 2.125rem);
+  --text-h3: 1.0625rem;
+  --text-body: 1.125rem;
+  --text-small: 0.9375rem;
+  --text-figure: clamp(1.75rem, 3vw, 2.5rem);
+  --text-label: 0.75rem;
+
+  /* Space, shape, z — carried over from the light design; the rhythm was never
+     the problem. No shadow tokens: on this ground, depth is light. */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+  --space-7: 6rem;
+
+  --radius-s: 4px;
+  --radius-m: 8px;
+
+  --z-header: 30;
+  --z-hint: 50;
+
+  --container-max: 72rem;
+  --touch-target: 44px;
+
+  /* Beam position, in viewport pixels. Written by the pointer handler in
+     NightLayout.astro. The resting default sits high and centre so a page that
+     never receives a pointermove still looks lit. */
+  --beam-x: 50vw;
+  --beam-y: 28vh;
+}

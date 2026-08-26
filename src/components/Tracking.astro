@@ -1,0 +1,117 @@
+---
+import { getT, type Locale } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getT(locale);
+---
+
+<!--
+  Stub section for the "Sendung verfolgen" header button.
+  GPS-trace API integration point: wire the form below to the real tracking
+  service once available (endpoint, auth, and live-location rendering are all
+  TODO). Until then the submit handler just reveals the stub note below.
+-->
+<section id="tracking" class="tracking section">
+  <div class="container tracking-card">
+    <h2>{t('home.tracking.title')}</h2>
+    <p class="tracking-text">{t('home.tracking.text')}</p>
+
+    <form class="tracking-form" data-tracking-form>
+      <label class="tracking-label" for="tracking-id">{t('home.tracking.inputLabel')}</label>
+      <div class="tracking-row">
+        <input
+          id="tracking-id"
+          name="tracking-id"
+          type="text"
+          class="tracking-input"
+          placeholder={t('home.tracking.inputPlaceholder')}
+          autocomplete="off"
+        />
+        <button type="submit" class="btn btn-tracking-submit">{t('home.tracking.submitLabel')}</button>
+      </div>
+      <p class="tracking-stub muted" role="status" data-tracking-stub hidden>{t('home.tracking.stubNote')}</p>
+    </form>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-tracking-form]').forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      form.querySelector<HTMLElement>('[data-tracking-stub]')?.removeAttribute('hidden');
+    });
+  });
+</script>
+
+<style>
+  .tracking-card {
+    max-width: 40rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-m);
+    box-shadow: var(--shadow-crate);
+    padding: var(--space-5);
+  }
+
+  .tracking-text {
+    margin-top: var(--space-2);
+    max-width: 50ch;
+  }
+
+  .tracking-form {
+    margin-top: var(--space-4);
+  }
+
+  .tracking-label {
+    display: block;
+    font-size: var(--text-small);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-1);
+  }
+
+  .tracking-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .tracking-input {
+    flex: 1 1 14rem;
+    min-height: var(--touch-target);
+    padding-inline: var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-s);
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font: inherit;
+  }
+
+  .tracking-input:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  .btn-tracking-submit {
+    min-height: var(--touch-target);
+    padding-inline: var(--space-4);
+    border-radius: var(--radius-s);
+    border: 1px solid var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-bg);
+    font-weight: 600;
+  }
+
+  .btn-tracking-submit:hover,
+  .btn-tracking-submit:focus-visible {
+    background: var(--color-text);
+  }
+
+  .tracking-stub {
+    margin-top: var(--space-3);
+    font-size: var(--text-small);
+  }
+</style>

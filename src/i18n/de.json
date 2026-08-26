@@ -1,0 +1,209 @@
+{
+  "meta": {
+    "home": {
+      "title": "Innviertel Express — Firmentransporte & Kurierfahrten im Innviertel",
+      "description": "Firmentransporte, Kurierfahrten und Zustellungen im Innviertel mit dem Fiat Doblo Cargo. Schnell erreichbar, erfahrene Fahrer, Sendungen nachverfolgbar."
+    }
+  },
+  "nav": {
+    "vehicle": "Fahrzeug",
+    "testimonials": "Referenzen",
+    "contact": "Kontakt"
+  },
+  "common": {
+    "brand": "Innviertel Express",
+    "whatsappCta": "WhatsApp schreiben",
+    "trackingCta": "Sendung verfolgen",
+    "callCta": "Anrufen",
+    "phoneDisplay": "+43 000 000 00 00",
+    "email": "office@innviertel-express.at",
+    "responseClaim": "Antwort meist innerhalb von 30 Minuten (Mo–Sa, 7–20 Uhr)",
+    "languageSwitcherLabel": "Sprache wählen",
+    "hintAvailable": "Diese Seite gibt es auch auf Deutsch",
+    "hintOpen": "Wechseln",
+    "hintDismiss": "Ausblenden",
+    "skipToContent": "Zum Inhalt springen"
+  },
+  "footer": {
+    "tagline": "Firmentransporte & Kurierfahrten im Innviertel, Oberösterreich",
+    "impressumLink": "Impressum",
+    "areaNote": "Braunau am Inn · Ried im Innkreis · Schärding · Mattighofen · Altheim · Obernberg am Inn"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Über Innviertel Express",
+      "title": "Transporte im Innviertel, persönlich und verlässlich.",
+      "subtitle": "Innviertel Express ist ein inhabergeführtes Kleintransportunternehmen für Firmen und Privatkunden in der Region. Ein Fahrer, ein Fahrzeug, ein direkter Ansprechpartner.",
+      "photoAlt": "Der Fahrer von Innviertel Express vor seinem Fiat Doblo Cargo"
+    },
+    "numbers": {
+      "title": "Der Transporter",
+      "subtitle": "Fiat Doblo Cargo — die wichtigsten Zahlen",
+      "items": [
+        { "label": "Nutzlast", "value": "850 kg" },
+        { "label": "Laderaum", "value": "4,2 m³" },
+        { "label": "Europaletten", "value": "2" },
+        { "label": "Antwortzeit", "value": "~30 min" }
+      ]
+    },
+    "trust": {
+      "title": "Womit Sie rechnen können",
+      "items": [
+        {
+          "title": "Schnell & rund um die Uhr",
+          "text": "Anfragen werden zügig bearbeitet — auch außerhalb der üblichen Bürozeiten."
+        },
+        {
+          "title": "Sendungen nachverfolgbar",
+          "text": "Sie erfahren, wo sich Ihre Sendung gerade befindet und wann sie ankommt."
+        },
+        {
+          "title": "Erfahrene Fahrer",
+          "text": "Jahrelange Erfahrung im Güterverkehr — sorgfältig, pünktlich, zuverlässig."
+        }
+      ]
+    },
+    "testimonials": {
+      "title": "Was Kunden sagen",
+      "items": [
+        {
+          "quote": "Zuverlässig, pünktlich und unkompliziert — genau das, was wir für unsere Firma brauchen.",
+          "name": "M. F.",
+          "role": "Handwerksbetrieb, Braunau am Inn"
+        },
+        {
+          "quote": "Kurzfristige Anfrage, schnelle Antwort, saubere Abwicklung.",
+          "name": "S. W.",
+          "role": "Einkauf, Ried im Innkreis"
+        },
+        {
+          "quote": "Unsere Sendungen kommen immer pünktlich an. Ein Ansprechpartner, keine Überraschungen.",
+          "name": "K. A.",
+          "role": "Büroleitung, Schärding"
+        },
+        {
+          "quote": "Professionell und flexibel — auch bei kurzfristigen Aufträgen ein verlässlicher Partner.",
+          "name": "T. H.",
+          "role": "Einzelhandel, Mattighofen"
+        }
+      ]
+    },
+    "tracking": {
+      "title": "Sendung verfolgen",
+      "text": "Live-Standort Ihrer Sendung per GPS — diese Funktion wird gerade angebunden und ist in Kürze verfügbar.",
+      "inputLabel": "Sendungsnummer",
+      "inputPlaceholder": "z. B. IE-000000",
+      "submitLabel": "Verfolgen",
+      "stubNote": "Sendungsverfolgung noch nicht verfügbar. Bei dringenden Fragen zu einer laufenden Lieferung einfach per WhatsApp melden."
+    },
+    "contact": {
+      "title": "Kontakt",
+      "text": "Erreichbar per WhatsApp, Telefon oder E-Mail.",
+      "phoneLabel": "Telefon",
+      "emailLabel": "E-Mail"
+    }
+  },
+  "legal": {
+    "title": "Impressum",
+    "intro": "Offenlegung gemäß § 5 ECG und § 14 UGB. Wer sein Gewerbe zeigt, hat nichts zu verstecken.",
+    "driverNote": "Innviertel Express wird von Andreas Huber persönlich geführt und gefahren.",
+    "fields": [
+      { "label": "Unternehmen", "value": "Andreas Huber — Innviertel Express e.U." },
+      { "label": "Sitz", "value": "Musterstraße 1, 4950 Altheim, Österreich" },
+      { "label": "Gewerbe", "value": "Kleintransportgewerbe / Güterbeförderung bis 2,5 t hzG" },
+      { "label": "GISA-Zahl", "value": "00000000" },
+      { "label": "UID-Nummer", "value": "ATU00000000" },
+      { "label": "Mitglied", "value": "WKO Oberösterreich, Fachgruppe Güterbeförderung" },
+      { "label": "Versicherung", "value": "Transportversicherung, Polizze 000-0000000" },
+      { "label": "Aufsichtsbehörde", "value": "Bezirkshauptmannschaft Braunau am Inn" },
+      { "label": "Kontakt", "value": "+43 000 000 00 00 · office@innviertel-express.at" }
+    ]
+  },
+  "whatsapp": {
+    "prefill": {
+      "home": "Hallo! Ich brauche einen Transport im Innviertel: [was] von [Ort] nach [Ort]. Geht das bei Ihnen?"
+    }
+  },
+  "new": {
+    "meta": {
+      "title": "Innviertel Express — Kurierfahrten und Firmentransporte, Tag und Nacht",
+      "description": "Firmentransporte und Kurierfahrten — regional, österreichweit und über die Grenze. Direktfahrten ohne Umschlag, auch nachts und am Wochenende."
+    },
+    "nav": {
+      "vehicle": "Fahrzeug",
+      "cases": "Situationen",
+      "contact": "Kontakt"
+    },
+    "hero": {
+      "title": "Unterwegs, wo es nötig ist.",
+      "lead": "Firmentransporte und Kurierfahrten — regional und auf lange Strecke, auch nachts und am Wochenende.",
+      "photoAlt": "Fahrer von Innviertel Express vor dem Fiat Doblò Cargo",
+      "status": ["Österreich · EU", "Direktfahrten", "Tag & Nacht", "GPS-Ortung"]
+    },
+    "vehicle": {
+      "label": "Das Fahrzeug",
+      "title": "Fiat Doblò Cargo Maxi",
+      "text": "Ein Kastenwagen, kein Lkw. Was hineinpasst, steht hier — damit Sie vor der Anfrage wissen, ob es sich ausgeht.",
+      "photoAlt": "Blick durch die geöffneten Hecktüren in den leeren Laderaum des Fiat Doblò Cargo",
+      "specs": [
+        { "label": "Nutzlast", "value": "850 kg" },
+        { "label": "Laderaum", "value": "4,2 m³" },
+        { "label": "Europaletten", "value": "2" }
+      ],
+      "dims": {
+        "length": "Länge",
+        "width": "Breite",
+        "height": "Höhe",
+        "lengthValue": "2170 mm",
+        "widthValue": "1230 mm",
+        "heightValue": "1220 mm",
+        "widthNote": "zwischen den Radkästen"
+      },
+      "note": "Maße gerundet. Wenn es knapp wird: Foto schicken, wir sagen Ihnen, ob es hineingeht."
+    },
+    "cases": {
+      "label": "Situationen",
+      "title": "Wenn es eng wird",
+      "items": [
+        {
+          "situation": "02:00 Uhr. Die Anlage steht.",
+          "answer": "Nacht- und Wochenendfahrten sind hier normal, nicht die Ausnahme. Anfrage per WhatsApp, Antwort in der Regel innerhalb von 30 Minuten."
+        },
+        {
+          "situation": "600 km, und morgen früh muss es dort sein.",
+          "answer": "Direktfahrt ohne Umschlag. Die Sendung bleibt im selben Fahrzeug, kein Depot dazwischen."
+        },
+        {
+          "situation": "Wo ist die Sendung gerade?",
+          "answer": "GPS im Fahrzeug. Standort und voraussichtliche Ankunft jederzeit auf Anfrage."
+        },
+        {
+          "situation": "Das darf nicht verrutschen.",
+          "answer": "Zurrgurte, Decken und Kantenschutz sind an Bord. Eine Transportversicherung besteht."
+        }
+      ]
+    },
+    "voices": {
+      "title": "Stimmen",
+      "note": "Platzhalter — echte Kundenstimmen folgen.",
+      "items": [
+        { "quote": "Platzhalter für ein echtes Kundenzitat.", "name": "Kundenname", "role": "Branche, Ort" },
+        { "quote": "Platzhalter für ein echtes Kundenzitat.", "name": "Kundenname", "role": "Branche, Ort" },
+        { "quote": "Platzhalter für ein echtes Kundenzitat.", "name": "Kundenname", "role": "Branche, Ort" }
+      ]
+    },
+    "tracking": {
+      "title": "Sendung verfolgen",
+      "text": "Das Fahrzeug hat GPS. Die Abfrage über die Sendungsnummer wird gerade angebunden; bis dahin genügt eine kurze Nachricht."
+    },
+    "contact": {
+      "title": "Kontakt",
+      "text": "Drei Wege, einer reicht.",
+      "claim": "Mo–So erreichbar. Antwort in der Regel innerhalb von 30 Minuten."
+    },
+    "footer": {
+      "tagline": "Firmentransporte und Kurierfahrten — regional und auf lange Strecke."
+    },
+    "compare": "Alte Version"
+  }
+}

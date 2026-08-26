@@ -1,0 +1,223 @@
+---
+import { getT, getRaw, type Locale } from '../../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getT(locale);
+
+// TODO(client): replace new.voices.items in all four locale files with real,
+// attributable customer quotes, then delete new.voices.note and the .placeholder
+// styling below. Nothing here may go live as-is — these are dummy strings.
+const items = getRaw<{ quote: string; name: string; role: string }[]>(locale, 'new.voices.items');
+---
+
+<section id="stimmen" class="section">
+  <div class="container">
+    <p class="label">{t('new.voices.title')}</p>
+
+    <div class="carousel" data-carousel>
+      <div class="carousel-viewport">
+        <ul class="carousel-track" data-track>
+          {
+            items.map((item) => (
+              <li class="carousel-slide">
+                <figure class="voice lit">
+                  <blockquote>{item.quote}</blockquote>
+                  <figcaption>
+                    <span class="voice-name">{item.name}</span>
+                    <span class="voice-role muted">{item.role}</span>
+                  </figcaption>
+                </figure>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="carousel-dots" data-dots>
+        {
+          items.map((item, i) => (
+            <button
+              type="button"
+              class="carousel-dot"
+              data-dot={i}
+              aria-label={`${item.name} ${i + 1}`}
+              aria-current={i === 0 ? 'true' : 'false'}
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    <p class="placeholder-note">{t('new.voices.note')}</p>
+  </div>
+</section>
+
+<script>
+  const INTERVAL = 5000;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
+    const track = root.querySelector<HTMLElement>('[data-track]');
+    const dots = [...root.querySelectorAll<HTMLButtonElement>('[data-dot]')];
+    if (!track || dots.length === 0) return;
+
+    const count = dots.length;
+    let index = 0;
+    let timer: number | undefined;
+
+    const apply = () => {
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((dot, i) => dot.setAttribute('aria-current', i === index ? 'true' : 'false'));
+    };
+
+    const go = (next: number) => {
+      index = (next + count) % count;
+      apply();
+    };
+
+    const start = () => {
+      if (reduceMotion.matches || timer !== undefined) return;
+      timer = window.setInterval(() => go(index + 1), INTERVAL);
+    };
+
+    const stop = () => {
+      if (timer !== undefined) {
+        clearInterval(timer);
+        timer = undefined;
+      }
+    };
+
+    dots.forEach((dot, i) =>
+      dot.addEventListener('click', () => {
+        go(i);
+        stop();
+        start();
+      })
+    );
+
+    // Pause while the visitor is reading (hover or keyboard focus), resume after.
+    root.addEventListener('pointerenter', stop);
+    root.addEventListener('pointerleave', start);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', start);
+
+    // Don't advance while the tab is hidden.
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+    reduceMotion.addEventListener('change', () => (reduceMotion.matches ? stop() : start()));
+
+    apply();
+    start();
+  });
+</script>
+
+<style>
+  .carousel {
+    margin-top: var(--space-4);
+  }
+
+  .carousel-viewport {
+    overflow: hidden;
+  }
+
+  .carousel-track {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .carousel-slide {
+    flex: 0 0 100%;
+    min-width: 0;
+    padding-block: var(--space-2);
+    display: flex;
+    justify-content: center;
+  }
+
+  .voice {
+    width: 100%;
+    max-width: 46rem;
+    margin: 0;
+    padding: var(--space-5);
+  }
+
+  .voice blockquote {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.125rem, 2.2vw, 1.5rem);
+    line-height: 1.32;
+    letter-spacing: -0.02em;
+    color: var(--hi);
+    text-wrap: balance;
+  }
+
+  .voice figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-2);
+    margin-top: var(--space-4);
+    font-size: var(--text-small);
+  }
+
+  .voice-name {
+    color: var(--body);
+    font-weight: 500;
+  }
+
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-1);
+    margin-top: var(--space-2);
+  }
+
+  .carousel-dot {
+    width: var(--touch-target);
+    height: var(--touch-target);
+    padding: 0;
+    border: none;
+    background: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .carousel-dot::before {
+    content: '';
+    width: 22px;
+    height: 2px;
+    background: var(--edge);
+    transition: background-color 200ms ease;
+  }
+
+  .carousel-dot:hover::before {
+    background: var(--muted);
+  }
+
+  .carousel-dot[aria-current='true']::before {
+    background: var(--gradient-speed);
+  }
+
+  /* Visible, deliberately unmissable: this section is not real yet. */
+  .placeholder-note {
+    margin-top: var(--space-3);
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carousel-track {
+      transition: none;
+    }
+  }
+</style>

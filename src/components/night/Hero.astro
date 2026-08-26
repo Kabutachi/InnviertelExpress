@@ -1,0 +1,173 @@
+---
+import { Image } from 'astro:assets';
+import heroPhoto from '../../assets/hero-photo.png';
+import { getT, getRaw, type Locale } from '../../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getT(locale);
+
+const status = getRaw<string[]>(locale, 'new.hero.status');
+const imageWidths = [420, 640, 900, 1300];
+const imageSizes = '(min-width: 1080px) 46vw, (min-width: 640px) 80vw, 92vw';
+---
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <h1>{t('new.hero.title')}</h1>
+      <p class="lede hero-lede">{t('new.hero.lead')}</p>
+    </div>
+
+    {/*
+      The hero thesis: you find him with the light.
+      Layer 1 is the photograph graded to night. Layer 2 is the same frame at
+      full daylight, masked to a soft circle that sits wherever the light is.
+      The mask needs coordinates local to this element and mask-attachment is not
+      dependable, so --hero-x / --hero-y are written here by the handler in
+      NightLayout.astro rather than shared through <html> like --beam-x/y.
+    */}
+    <figure class="hero-photo" data-hero-light>
+      <Image
+        class="shot shot-night"
+        src={heroPhoto}
+        alt={t('new.hero.photoAlt')}
+        widths={imageWidths}
+        sizes={imageSizes}
+        loading="eager"
+        fetchpriority="high"
+      />
+      <span class="tint" aria-hidden="true"></span>
+      <Image
+        class="shot shot-lit"
+        src={heroPhoto}
+        alt=""
+        aria-hidden="true"
+        widths={imageWidths}
+        sizes={imageSizes}
+        loading="eager"
+      />
+    </figure>
+  </div>
+
+  <div class="container">
+    <ul class="status">
+      {status.map((item) => <li>{item}</li>)}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: var(--space-6) var(--space-5);
+  }
+
+  .hero-grid {
+    display: grid;
+    gap: var(--space-5);
+    align-items: center;
+  }
+
+  .hero-lede {
+    margin-top: var(--space-4);
+    max-width: 34rem;
+  }
+
+  .hero-photo {
+    position: relative;
+    margin: 0;
+    /* Resting position of the light: centred on the driver. A visitor with no
+       pointer (touch, keyboard) still lands on a lit hero rather than a dark box. */
+    --hero-x: 34%;
+    --hero-y: 47%;
+    /* No frame, no border, no card — the photograph fades into the night ground
+       instead of sitting in a box on top of it. */
+    -webkit-mask-image: radial-gradient(
+      66% 60% at 50% 50%,
+      #000 20%,
+      rgba(0, 0, 0, 0.45) 58%,
+      transparent 92%
+    );
+    mask-image: radial-gradient(
+      66% 60% at 50% 50%,
+      #000 20%,
+      rgba(0, 0, 0, 0.45) 58%,
+      transparent 92%
+    );
+  }
+
+  .hero-photo :global(.shot) {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .shot-night {
+    filter: brightness(0.26) saturate(0.2) contrast(1.15);
+  }
+
+  .tint {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(190deg, #16233d 0%, #0b0e13 85%);
+    opacity: 0.55;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+
+  .hero-photo :global(.shot-lit) {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    object-fit: cover;
+    /* Radii are percentages of the figure, not pixels: the lit pool then keeps
+       the same proportion of the photograph at every breakpoint. A fixed radius
+       large enough for desktop swallows the whole frame on a phone. */
+    -webkit-mask-image: radial-gradient(
+      30% 40% at var(--hero-x) var(--hero-y),
+      #000 0%,
+      rgba(0, 0, 0, 0.66) 46%,
+      transparent 80%
+    );
+    mask-image: radial-gradient(
+      30% 40% at var(--hero-x) var(--hero-y),
+      #000 0%,
+      rgba(0, 0, 0, 0.66) 46%,
+      transparent 80%
+    );
+  }
+
+  /* Facts, not claims: what there is, and where it goes. */
+  .status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    list-style: none;
+    margin: var(--space-5) 0 0;
+    padding: var(--space-3) 0 0;
+    border-top: 1px solid var(--edge);
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .status li:first-child {
+    color: var(--hi);
+  }
+
+  @media (min-width: 1080px) {
+    .hero {
+      padding-block: var(--space-7) var(--space-5);
+    }
+
+    .hero-grid {
+      grid-template-columns: 1fr 1.25fr;
+      gap: var(--space-6);
+    }
+  }
+</style>

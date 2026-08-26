@@ -1,0 +1,341 @@
+---
+import logoSrc from '../assets/logo.svg';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import { getT, localizePath, whatsappHref, telHref, type Locale, type PageId } from '../i18n/config';
+
+interface Props {
+  locale: Locale;
+  page: PageId;
+}
+
+const { locale, page } = Astro.props;
+const t = getT(locale);
+
+const navItems = [
+  { href: '#fahrzeug', label: t('nav.vehicle') },
+  { href: '#referenzen', label: t('nav.testimonials') },
+  { href: '#kontakt', label: t('nav.contact') },
+];
+
+const whatsappIcon =
+  'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.198.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12.04 2C6.577 2 2.13 6.447 2.13 11.91c0 2.1.55 4.075 1.5 5.775l-1.59 5.815 5.95-1.56a9.87 9.87 0 0 0 4.03.86h.005c5.463 0 9.91-4.447 9.91-9.91 0-2.646-1.03-5.135-2.9-7.005A9.86 9.86 0 0 0 12.04 2Zm0 18.008h-.004a8.29 8.29 0 0 1-4.198-1.148l-.301-.179-3.117.817.832-3.037-.196-.312a8.267 8.267 0 0 1-1.267-4.407c0-4.57 3.72-8.29 8.29-8.29 2.216 0 4.298.863 5.865 2.432a8.243 8.243 0 0 1 2.427 5.868c0 4.57-3.72 8.256-8.331 8.256Z';
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="logo-link" href={localizePath(locale, 'home')}>
+      <img src={logoSrc.src} alt={t('common.brand')} width="216" height="36" />
+    </a>
+
+    <div class="header-desktop">
+      <nav class="nav" aria-label={t('nav.contact')}>
+        {
+          navItems.map((item) => (
+            <a href={item.href} class="nav-link link-tick">
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <LanguageSwitcher locale={locale} page={page} />
+
+      <div class="header-actions">
+        <a class="btn btn-whatsapp" href={whatsappHref(locale)} rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+            <path d={whatsappIcon} />
+          </svg>
+          <span class="btn-label">{t('common.whatsappCta')}</span>
+        </a>
+        <a class="btn btn-tracking" href="#tracking">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          <span class="btn-label">{t('common.trackingCta')}</span>
+        </a>
+      </div>
+    </div>
+
+    <button class="burger" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label={t('common.brand')} data-burger>
+      <svg class="burger-open" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false">
+        <line x1="3" y1="7" x2="21" y2="7" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="17" x2="21" y2="17" />
+      </svg>
+      <svg class="burger-close" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false">
+        <line x1="5" y1="5" x2="19" y2="19" />
+        <line x1="19" y1="5" x2="5" y2="19" />
+      </svg>
+    </button>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+    <div class="container mobile-menu-inner">
+      <nav class="mobile-nav" aria-label={t('nav.contact')}>
+        {
+          navItems.map((item) => (
+            <a href={item.href} class="mobile-nav-link">
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+
+      <div class="mobile-langs">
+        <LanguageSwitcher locale={locale} page={page} />
+      </div>
+
+      <div class="mobile-actions">
+        <a class="btn btn-whatsapp mobile-btn" href={whatsappHref(locale)} rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+            <path d={whatsappIcon} />
+          </svg>
+          <span>{t('common.whatsappCta')}</span>
+        </a>
+        <a class="btn btn-tracking mobile-btn" href="#tracking">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          <span>{t('common.trackingCta')}</span>
+        </a>
+      </div>
+
+      <div class="mobile-contact">
+        <a class="mobile-contact-link" href={telHref}>{t('common.callCta')} · {t('common.phoneDisplay')}</a>
+        <a class="mobile-contact-link" href={`mailto:${t('common.email')}`}>{t('common.email')}</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const burger = document.querySelector<HTMLButtonElement>('[data-burger]');
+  const menu = document.querySelector<HTMLElement>('[data-mobile-menu]');
+
+  if (burger && menu) {
+    const setOpen = (open: boolean) => {
+      burger.setAttribute('aria-expanded', String(open));
+      menu.hidden = !open;
+      document.body.classList.toggle('menu-open', open);
+    };
+
+    burger.addEventListener('click', () => setOpen(burger.getAttribute('aria-expanded') !== 'true'));
+    menu.addEventListener('click', (event) => {
+      if ((event.target as Element).closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        burger.focus();
+      }
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 992) setOpen(false);
+    });
+  }
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-block: var(--space-3);
+  }
+
+  .logo-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch-target);
+    flex: none;
+  }
+
+  .logo-link img {
+    height: 36px;
+    width: auto;
+  }
+
+  .header-desktop {
+    display: none;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .nav {
+    display: flex;
+    gap: var(--space-4);
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch-target);
+    text-decoration: none;
+    color: var(--color-text);
+  }
+
+  .header-actions {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+    min-height: var(--touch-target);
+    padding-inline: var(--space-3);
+    border-radius: var(--radius-s);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: var(--text-small);
+    white-space: nowrap;
+    transition:
+      box-shadow 200ms ease,
+      transform 200ms ease,
+      background-color 200ms ease,
+      border-color 200ms ease;
+  }
+
+  .btn-whatsapp {
+    background: var(--gradient-speed);
+    color: var(--color-surface);
+    box-shadow: var(--shadow-crate);
+  }
+
+  .btn-whatsapp:hover,
+  .btn-whatsapp:focus-visible {
+    box-shadow: var(--shadow-crate-lift);
+    transform: translate(-1px, -1px);
+  }
+
+  .btn-tracking {
+    background: transparent;
+    color: var(--color-ink);
+    border: 1px solid var(--color-border);
+  }
+
+  .btn-tracking:hover,
+  .btn-tracking:focus-visible {
+    border-color: var(--color-ink);
+  }
+
+  /* Burger */
+  .burger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--touch-target);
+    height: var(--touch-target);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-s);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    flex: none;
+  }
+
+  .burger-close {
+    display: none;
+  }
+
+  .burger[aria-expanded='true'] .burger-open {
+    display: none;
+  }
+
+  .burger[aria-expanded='true'] .burger-close {
+    display: block;
+  }
+
+  /* Mobile menu panel */
+  .mobile-menu {
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  .mobile-menu[hidden] {
+    display: none;
+  }
+
+  .mobile-menu-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding-block: var(--space-4) var(--space-5);
+  }
+
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobile-nav-link {
+    display: flex;
+    align-items: center;
+    min-height: var(--touch-target);
+    padding-block: var(--space-1);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--color-ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .mobile-langs {
+    display: flex;
+  }
+
+  .mobile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .mobile-btn {
+    min-height: 52px;
+    font-size: 1rem;
+  }
+
+  .mobile-contact {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobile-contact-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch-target);
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: var(--text-small);
+  }
+
+  @media (min-width: 992px) {
+    .header-desktop {
+      display: flex;
+    }
+
+    .burger,
+    .mobile-menu {
+      display: none;
+    }
+  }
+
+  @media (max-width: 460px) {
+    .header-desktop .btn-label {
+      display: none;
+    }
+  }
+</style>

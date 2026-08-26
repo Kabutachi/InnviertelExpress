@@ -1,0 +1,130 @@
+---
+import { getT, type Locale } from '../../i18n/config';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getT(locale);
+---
+
+<!--
+  Stub. GPS-trace API integration point: wire the form below to the real tracking
+  service once available (endpoint, auth, and live-location rendering are all
+  TODO). Until then the submit handler just reveals the note below.
+  Form field labels are shared with the original design's home.tracking.* keys.
+-->
+<section id="tracking" class="section">
+  <div class="container">
+    <div class="tracking lit">
+      <h2>{t('new.tracking.title')}</h2>
+      <p class="tracking-text">{t('new.tracking.text')}</p>
+
+      <form class="tracking-form" data-tracking-form>
+        <label class="tracking-label" for="tracking-id">{t('home.tracking.inputLabel')}</label>
+        <div class="tracking-row">
+          <input
+            id="tracking-id"
+            name="tracking-id"
+            type="text"
+            class="tracking-input"
+            placeholder={t('home.tracking.inputPlaceholder')}
+            autocomplete="off"
+          />
+          <button type="submit" class="tracking-submit">{t('home.tracking.submitLabel')}</button>
+        </div>
+        <p class="tracking-stub" role="status" data-tracking-stub hidden>{t('home.tracking.stubNote')}</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-tracking-form]').forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      form.querySelector<HTMLElement>('[data-tracking-stub]')?.removeAttribute('hidden');
+    });
+  });
+</script>
+
+<style>
+  .tracking {
+    max-width: 40rem;
+    padding: var(--space-5);
+  }
+
+  .tracking-text {
+    margin-top: var(--space-3);
+    max-width: 48ch;
+    font-size: var(--text-small);
+  }
+
+  .tracking-form {
+    margin-top: var(--space-4);
+  }
+
+  .tracking-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: var(--space-2);
+  }
+
+  .tracking-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .tracking-input {
+    flex: 1 1 14rem;
+    /* An input's intrinsic min-width (default size=20) is wider than the card at
+       375px, and min-width:auto would stop it shrinking past that. */
+    min-width: 0;
+    min-height: var(--touch-target);
+    padding-inline: var(--space-3);
+    border: 1px solid var(--edge);
+    border-radius: var(--radius-s);
+    background: var(--night-2);
+    color: var(--hi);
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+  }
+
+  .tracking-input::placeholder {
+    color: var(--muted);
+  }
+
+  .tracking-submit {
+    min-height: var(--touch-target);
+    padding-inline: var(--space-4);
+    border-radius: var(--radius-s);
+    border: 1px solid var(--edge);
+    background: transparent;
+    color: var(--hi);
+    font-weight: 500;
+    font-size: var(--text-small);
+    transition: border-color 180ms ease;
+  }
+
+  .tracking-submit:hover,
+  .tracking-submit:focus-visible {
+    border-color: var(--gold);
+  }
+
+  .tracking-stub {
+    margin-top: var(--space-3);
+    font-size: var(--text-small);
+    color: var(--muted);
+    max-width: 48ch;
+  }
+
+  .tracking-stub[hidden] {
+    display: none;
+  }
+</style>
