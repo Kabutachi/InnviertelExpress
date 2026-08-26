@@ -7,6 +7,8 @@ import TrustBlock from '../../components/TrustBlock.astro';
 import Testimonials from '../../components/Testimonials.astro';
 import Tracking from '../../components/Tracking.astro';
 import Impressum from '../../components/Impressum.astro';
+import { Image } from 'astro:assets';
+import heroPhoto from '../../assets/hero-photo.png';
 import { getT, whatsappHref, telHref, getStaticLocaleParams, resolveLocale } from '../../i18n/config';
 
 export function getStaticPaths() {
@@ -28,11 +30,15 @@ const t = getT(locale);
           <p class="hero-subtitle">{t('home.hero.subtitle')}</p>
         </div>
         <div class="hero-demo">
-          <!-- Real photo needed here: the driver standing at the open side/rear door
-               of the Fiat Doblo Cargo, daylight, confident posture — the "one man,
-               one van" proof shot. Aspect ratio 4:3, min 1600px wide. -->
           <figure class="hero-photo-slot">
-            <figcaption class="muted">{t('home.hero.photoAlt')}</figcaption>
+            <Image
+              src={heroPhoto}
+              alt={t('home.hero.photoAlt')}
+              widths={[420, 640, 900, 1300]}
+              sizes="(min-width: 960px) 46vw, 92vw"
+              loading="eager"
+              fetchpriority="high"
+            />
           </figure>
         </div>
       </div>
@@ -136,15 +142,16 @@ const t = getT(locale);
     margin: 0;
     aspect-ratio: 4 / 3;
     background: var(--color-surface);
-    border: 2px dashed var(--color-border);
     border-radius: var(--radius-m);
     box-shadow: var(--shadow-crate);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--space-4);
-    text-align: center;
-    font-size: var(--text-small);
+    overflow: hidden;
+  }
+
+  .hero-photo-slot :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .contact-text {
