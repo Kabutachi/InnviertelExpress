@@ -22,7 +22,7 @@ const t = getT(locale);
 <BaseLayout locale={locale} page="home">
   <Header locale={locale} page="home" />
   <main id="main">
-    <section class="hero">
+    <section class="hero" data-reveal="left">
       <div class="container hero-grid">
         <div class="hero-copy">
           <p class="eyebrow">{t('home.hero.eyebrow')}</p>
@@ -52,7 +52,7 @@ const t = getT(locale);
 
     <Tracking locale={locale} />
 
-    <section id="kontakt" class="section">
+    <section id="kontakt" class="section" data-reveal="right">
       <div class="container">
         <h2>{t('home.contact.title')}</h2>
         <p class="contact-text">{t('home.contact.text')}</p>
@@ -93,6 +93,28 @@ const t = getT(locale);
   </main>
   <Footer locale={locale} page="home" />
 </BaseLayout>
+
+<script>
+  const targets = document.querySelectorAll<HTMLElement>('[data-reveal]');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  if (reduceMotion.matches || !('IntersectionObserver' in window)) {
+    targets.forEach((el) => el.classList.add('is-visible'));
+  } else {
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -10% 0px' }
+    );
+    targets.forEach((el) => observer.observe(el));
+  }
+</script>
 
 <style>
   .hero {

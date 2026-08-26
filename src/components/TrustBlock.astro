@@ -9,18 +9,28 @@ const { locale } = Astro.props;
 const t = getT(locale);
 
 const trustItems = getRaw<{ title: string; text: string }[]>(locale, 'home.trust.items');
+
+// Not translatable content, so kept alongside the markup rather than in i18n JSON.
+const trustIcons = [
+  'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Zm0-15v5l3.5 2', // clock — fast, around the clock
+  'M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z|M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z', // pin — trackable
+  'M12 2 4 5v6c0 5 3.6 9.4 8 11 4.4-1.6 8-6 8-11V5l-8-3Z|m9 12 2 2 4-4', // badge check — experience
+];
 ---
 
-<section class="trust-block section">
+<section class="trust-block section" data-reveal="left">
   <div class="container">
     <h2 class="trust-title">{t('home.trust.title')}</h2>
   </div>
 
   <div class="trust-scroller container">
     {
-      trustItems.map((item) => (
+      trustItems.map((item, i) => (
         <article class="trust-card">
           <div class="trust-tick" aria-hidden="true" />
+          <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            {trustIcons[i].split('|').map((d) => <path d={d} />)}
+          </svg>
           <h3>{item.title}</h3>
           <p>{item.text}</p>
         </article>
@@ -59,6 +69,13 @@ const trustItems = getRaw<{ title: string; text: string }[]>(locale, 'home.trust
     width: 24px;
     height: 4px;
     background: var(--gradient-speed);
+    margin-bottom: var(--space-3);
+  }
+
+  .trust-icon {
+    width: 28px;
+    height: 28px;
+    color: var(--color-accent-1);
     margin-bottom: var(--space-2);
   }
 

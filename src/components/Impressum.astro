@@ -12,7 +12,7 @@ const fields = getRaw<{ label: string; value: string }[]>(locale, 'legal.fields'
 const fieldsWithFlags = fields.map((field) => ({ ...field, isFigure: /\d/.test(field.value) }));
 ---
 
-<section id="impressum" class="section">
+<section id="impressum" class="section" data-reveal="left">
   <div class="container impressum-container">
     <div class="freight-card">
       <h2>{t('legal.title')}</h2>

@@ -11,7 +11,7 @@ const t = getT(locale);
 const items = getRaw<{ quote: string; name: string; role: string }[]>(locale, 'home.testimonials.items');
 ---
 
-<section id="referenzen" class="testimonials section">
+<section id="referenzen" class="testimonials section" data-reveal="right">
   <div class="container">
     <h2>{t('home.testimonials.title')}</h2>
 
@@ -22,6 +22,9 @@ const items = getRaw<{ quote: string; name: string; role: string }[]>(locale, 'h
             items.map((item) => (
               <li class="carousel-slide">
                 <figure class="testimonial-card">
+                  <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                    <path d="M7 7h4v6a4 4 0 0 1-4 4H6v-2h1a2 2 0 0 0 2-2V9H7V7Zm8 0h4v6a4 4 0 0 1-4 4h-1v-2h1a2 2 0 0 0 2-2V9h-2V7Z" />
+                  </svg>
                   <blockquote>&ldquo;{item.quote}&rdquo;</blockquote>
                   <figcaption>
                     <span class="testimonial-name">{item.name}</span>
@@ -145,6 +148,13 @@ const items = getRaw<{ quote: string; name: string; role: string }[]>(locale, 'h
     padding: var(--space-5);
   }
 
+  .quote-icon {
+    width: 28px;
+    height: 28px;
+    color: var(--color-accent-1);
+    margin-bottom: var(--space-3);
+  }
+
   .testimonial-card blockquote {
     margin: 0;
     font-family: var(--font-display);
@@ -154,15 +164,6 @@ const items = getRaw<{ quote: string; name: string; role: string }[]>(locale, 'h
     line-height: 1.3;
     color: var(--color-ink);
     text-wrap: balance;
-  }
-
-  .testimonial-card blockquote::before {
-    content: '';
-    display: block;
-    width: 32px;
-    height: 5px;
-    background: var(--gradient-speed);
-    margin-bottom: var(--space-3);
   }
 
   .testimonial-card figcaption {

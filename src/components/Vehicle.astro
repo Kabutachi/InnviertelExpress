@@ -9,16 +9,28 @@ const { locale } = Astro.props;
 const t = getT(locale);
 
 const numbers = getRaw<{ label: string; value: string }[]>(locale, 'home.numbers.items');
+
+// Not translatable content, so kept alongside the markup rather than in i18n JSON.
+// Order matches home.numbers.items: payload, load space, euro-pallets, response time.
+const numberIcons = [
+  'M6 7v10M18 7v10M2 10v4M22 10v4M6 12h12', // dumbbell — payload
+  'M21 8 12 3 3 8v8l9 5 9-5V8Z|M3 8l9 5 9-5|M12 13v8', // cube — load space
+  'M12 2 2 7l10 5 10-5-10-5Z|m2 12 10 5 10-5|m2 17 10 5 10-5', // layers — euro-pallets
+  'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Zm0-15v5l3.5 2', // clock — response time
+];
 ---
 
-<section id="fahrzeug" class="vehicle section">
+<section id="fahrzeug" class="vehicle section" data-reveal="right">
   <div class="container">
     <h2>{t('home.numbers.title')}</h2>
     <p class="vehicle-subtitle muted">{t('home.numbers.subtitle')}</p>
     <div class="numbers-strip">
       {
-        numbers.map((item) => (
+        numbers.map((item, i) => (
           <div class="numbers-cell">
+            <svg class="numbers-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              {numberIcons[i].split('|').map((d) => <path d={d} />)}
+            </svg>
             <p class="figure numbers-value">{item.value}</p>
             <p class="numbers-label muted">{item.label}</p>
           </div>
@@ -49,6 +61,14 @@ const numbers = getRaw<{ label: string; value: string }[]>(locale, 'home.numbers
     background: var(--color-surface);
     padding: var(--space-4);
     text-align: center;
+  }
+
+  .numbers-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--color-accent-1);
+    margin-inline: auto;
+    margin-bottom: var(--space-2);
   }
 
   .numbers-value {
