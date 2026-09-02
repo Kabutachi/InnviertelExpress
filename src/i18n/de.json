@@ -31,15 +31,19 @@
   },
   "home": {
     "hero": {
-      "title": "Transportunternehmen im Innviertel.",
-      "subtitle": "Innviertel Express übernimmt Transporte für Firmen und Privatkunden in der Region Innviertel. Internationale Fahrten sind auf Anfrage möglich.",
+      "title": "Schnell. Flexibel. Direkt. 24/7.",
+      "subtitle": "Europaweiter Express-Transport bis 700 kg / 2 Europaletten",
+      "pickupLabel": "Abholung:",
+      "pickupAreas": "Oberösterreich · Salzburg · Bayern",
+      "deliveryLabel": "Zustellung:",
+      "deliveryArea": "ganz Europa",
       "photoAlt": "Der Fahrer von Innviertel Express vor seinem Fiat Doblo Cargo"
     },
     "numbers": {
       "title": "Der Transporter",
       "subtitle": "Fiat Doblo Cargo — die wichtigsten Zahlen",
       "items": [
-        { "label": "Nutzlast", "value": "850 kg" },
+        { "label": "Nutzlast", "value": "700 kg" },
         { "label": "Laderaum", "value": "4,2 m³" },
         { "label": "Europaletten", "value": "2" },
         { "label": "Antwortzeit", "value": "~30 min" }
@@ -55,10 +59,6 @@
         {
           "title": "Sendungen nachverfolgbar",
           "text": "Sie erfahren, wo sich Ihre Sendung gerade befindet und wann sie ankommt."
-        },
-        {
-          "title": "Erfahrene Fahrer",
-          "text": "Jahrelange Erfahrung im Güterverkehr — sorgfältig, pünktlich, zuverlässig."
         }
       ]
     },

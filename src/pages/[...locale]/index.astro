@@ -27,6 +27,16 @@ const t = getT(locale);
         <div class="hero-copy">
           <h1>{t('home.hero.title')}</h1>
           <p class="hero-subtitle">{t('home.hero.subtitle')}</p>
+          <dl class="hero-details">
+            <div class="hero-detail-row">
+              <dt>{t('home.hero.pickupLabel')}</dt>
+              <dd>{t('home.hero.pickupAreas')}</dd>
+            </div>
+            <div class="hero-detail-row">
+              <dt>{t('home.hero.deliveryLabel')}</dt>
+              <dd>{t('home.hero.deliveryArea')}</dd>
+            </div>
+          </dl>
         </div>
         <div class="hero-demo">
           <figure class="hero-photo-slot">
@@ -136,6 +146,33 @@ const t = getT(locale);
     font-size: 1.25rem;
     max-width: 38rem;
     margin-block: var(--space-4) 0;
+  }
+
+  .hero-details {
+    margin: var(--space-4) 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .hero-detail-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    font-size: var(--text-small);
+  }
+
+  .hero-detail-row dt {
+    font-family: var(--font-mono);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .hero-detail-row dd {
+    margin: 0;
+    color: var(--color-ink);
+    font-weight: 600;
   }
 
   .hero-photo-slot {

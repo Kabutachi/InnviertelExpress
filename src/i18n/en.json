@@ -31,15 +31,19 @@
   },
   "home": {
     "hero": {
-      "title": "A transport company based in the Innviertel.",
-      "subtitle": "Innviertel Express handles transport for businesses and private customers in the Innviertel region. International trips are available on request.",
+      "title": "Fast. Flexible. Direct. 24/7.",
+      "subtitle": "Europe-wide express transport up to 700 kg / 2 Euro-pallets",
+      "pickupLabel": "Pickup:",
+      "pickupAreas": "Upper Austria · Salzburg · Bavaria",
+      "deliveryLabel": "Delivery:",
+      "deliveryArea": "all over Europe",
       "photoAlt": "The Innviertel Express driver in front of his Fiat Doblo Cargo"
     },
     "numbers": {
       "title": "The Van",
       "subtitle": "Fiat Doblo Cargo — the key numbers",
       "items": [
-        { "label": "Payload", "value": "850 kg" },
+        { "label": "Payload", "value": "700 kg" },
         { "label": "Load space", "value": "4,2 m³" },
         { "label": "Euro-pallets", "value": "2" },
         { "label": "Response time", "value": "~30 min" }
@@ -55,10 +59,6 @@
         {
           "title": "Shipments trackable",
           "text": "You'll know where your shipment is right now and when it's arriving."
-        },
-        {
-          "title": "Experienced drivers",
-          "text": "Years of experience in freight transport — careful, punctual, reliable."
         }
       ]
     },
