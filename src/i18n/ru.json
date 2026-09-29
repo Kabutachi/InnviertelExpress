@@ -16,7 +16,7 @@
     "trackingCta": "Отследить отправление",
     "callCta": "Позвонить",
     "phoneDisplay": "+43 000 000 00 00",
-    "email": "office@innviertel-express.at",
+    "email": "info@innexp.at",
     "responseClaim": "Ответ обычно в течение 30 минут (пн–сб, 7:00–20:00)",
     "languageSwitcherLabel": "Выбрать язык",
     "hintAvailable": "Эта страница есть и на русском",
@@ -42,6 +42,11 @@
     "numbers": {
       "title": "Автомобиль",
       "subtitle": "Fiat Doblo Cargo — главные цифры",
+      "photoAlts": [
+        "Вид через задние двери на пустой грузовой отсек Fiat Doblo Cargo",
+        "Вид через боковую сдвижную дверь на грузовой отсек Fiat Doblo Cargo",
+        "Fiat Doblo Cargo сбоку"
+      ],
       "items": [
         { "label": "Грузоподъёмность", "value": "700 kg" },
         { "label": "Объём кузова", "value": "4,2 m³" },
@@ -105,17 +110,16 @@
   "legal": {
     "title": "Импрессум (Impressum)",
     "intro": "Раскрытие информации согласно § 5 ECG и § 14 UGB. Кто открыто показывает свою деятельность, тому нечего скрывать.",
-    "driverNote": "Innviertel Express лично руководит и управляет Andreas Huber.",
+    "driverNote": "Innviertel Express лично руководит и управляет Puhovskiy Oleh.",
     "fields": [
-      { "label": "Компания", "value": "Andreas Huber — Innviertel Express e.U." },
-      { "label": "Адрес", "value": "Musterstraße 1, 4950 Altheim, Österreich" },
+      { "label": "Компания", "value": "Puhovskiy Oleh — Innviertel Express e.U." },
+      { "label": "Адрес", "value": "Maria Schmolln 9, 5241 Maria Schmolln, Австрия" },
       { "label": "Вид деятельности", "value": "Мелкогрузовые перевозки / грузоперевозки до 2,5 t hzG" },
       { "label": "Реестр (GISA)", "value": "00000000" },
       { "label": "Номер плательщика НДС (UID)", "value": "ATU00000000" },
       { "label": "Членство", "value": "WKO Oberösterreich, секция грузоперевозок" },
-      { "label": "Страхование", "value": "Транспортная страховка, полис 000-0000000" },
       { "label": "Надзорный орган", "value": "Bezirkshauptmannschaft Braunau am Inn" },
-      { "label": "Контакты", "value": "+43 000 000 00 00 · office@innviertel-express.at" }
+      { "label": "Контакты", "value": "+43 000 000 00 00 · info@innexp.at" }
     ]
   },
   "whatsapp": {

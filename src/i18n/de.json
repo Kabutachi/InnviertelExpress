@@ -16,7 +16,7 @@
     "trackingCta": "Sendung verfolgen",
     "callCta": "Anrufen",
     "phoneDisplay": "+43 000 000 00 00",
-    "email": "office@innviertel-express.at",
+    "email": "info@innexp.at",
     "responseClaim": "Antwort meist innerhalb von 30 Minuten (Mo–Sa, 7–20 Uhr)",
     "languageSwitcherLabel": "Sprache wählen",
     "hintAvailable": "Diese Seite gibt es auch auf Deutsch",
@@ -42,6 +42,11 @@
     "numbers": {
       "title": "Der Transporter",
       "subtitle": "Fiat Doblo Cargo — die wichtigsten Zahlen",
+      "photoAlts": [
+        "Blick durch die Hecktüren in den leeren Laderaum des Fiat Doblo Cargo",
+        "Blick durch die seitliche Schiebetür in den Laderaum des Fiat Doblo Cargo",
+        "Der Fiat Doblo Cargo von der Seite"
+      ],
       "items": [
         { "label": "Nutzlast", "value": "700 kg" },
         { "label": "Laderaum", "value": "4,2 m³" },
@@ -105,17 +110,16 @@
   "legal": {
     "title": "Impressum",
     "intro": "Offenlegung gemäß § 5 ECG und § 14 UGB. Wer sein Gewerbe zeigt, hat nichts zu verstecken.",
-    "driverNote": "Innviertel Express wird von Andreas Huber persönlich geführt und gefahren.",
+    "driverNote": "Innviertel Express wird von Puhovskiy Oleh persönlich geführt und gefahren.",
     "fields": [
-      { "label": "Unternehmen", "value": "Andreas Huber — Innviertel Express e.U." },
-      { "label": "Sitz", "value": "Musterstraße 1, 4950 Altheim, Österreich" },
+      { "label": "Unternehmen", "value": "Puhovskiy Oleh — Innviertel Express e.U." },
+      { "label": "Sitz", "value": "Maria Schmolln 9, 5241 Maria Schmolln, Österreich" },
       { "label": "Gewerbe", "value": "Kleintransportgewerbe / Güterbeförderung bis 2,5 t hzG" },
       { "label": "GISA-Zahl", "value": "00000000" },
       { "label": "UID-Nummer", "value": "ATU00000000" },
       { "label": "Mitglied", "value": "WKO Oberösterreich, Fachgruppe Güterbeförderung" },
-      { "label": "Versicherung", "value": "Transportversicherung, Polizze 000-0000000" },
       { "label": "Aufsichtsbehörde", "value": "Bezirkshauptmannschaft Braunau am Inn" },
-      { "label": "Kontakt", "value": "+43 000 000 00 00 · office@innviertel-express.at" }
+      { "label": "Kontakt", "value": "+43 000 000 00 00 · info@innexp.at" }
     ]
   },
   "whatsapp": {

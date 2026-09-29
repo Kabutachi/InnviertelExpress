@@ -4,8 +4,6 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Vehicle from '../../components/Vehicle.astro';
 import TrustBlock from '../../components/TrustBlock.astro';
-import Testimonials from '../../components/Testimonials.astro';
-import Tracking from '../../components/Tracking.astro';
 import Impressum from '../../components/Impressum.astro';
 import { Image } from 'astro:assets';
 import heroPhoto from '../../assets/hero-photo.png';
@@ -56,10 +54,6 @@ const t = getT(locale);
     <Vehicle locale={locale} />
 
     <TrustBlock locale={locale} />
-
-    <Testimonials locale={locale} />
-
-    <Tracking locale={locale} />
 
     <section id="kontakt" class="section" data-reveal="right">
       <div class="container">

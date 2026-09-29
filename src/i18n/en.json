@@ -16,7 +16,7 @@
     "trackingCta": "Track shipment",
     "callCta": "Call",
     "phoneDisplay": "+43 000 000 00 00",
-    "email": "office@innviertel-express.at",
+    "email": "info@innexp.at",
     "responseClaim": "Usually replies within 30 minutes (Mon–Sat, 7am–8pm)",
     "languageSwitcherLabel": "Choose language",
     "hintAvailable": "This page is also available in English",
@@ -42,6 +42,11 @@
     "numbers": {
       "title": "The Van",
       "subtitle": "Fiat Doblo Cargo — the key numbers",
+      "photoAlts": [
+        "View through the rear doors into the empty load bay of the Fiat Doblo Cargo",
+        "View through the side sliding door into the load bay of the Fiat Doblo Cargo",
+        "The Fiat Doblo Cargo from the side"
+      ],
       "items": [
         { "label": "Payload", "value": "700 kg" },
         { "label": "Load space", "value": "4,2 m³" },
@@ -105,17 +110,16 @@
   "legal": {
     "title": "Impressum",
     "intro": "Impressum (legal notice), required under § 5 ECG and § 14 UGB. Show your business, and you've got nothing to hide.",
-    "driverNote": "Innviertel Express is run and driven personally by Andreas Huber.",
+    "driverNote": "Innviertel Express is run and driven personally by Puhovskiy Oleh.",
     "fields": [
-      { "label": "Company", "value": "Andreas Huber — Innviertel Express e.U." },
-      { "label": "Registered office", "value": "Musterstraße 1, 4950 Altheim, Austria" },
+      { "label": "Company", "value": "Puhovskiy Oleh — Innviertel Express e.U." },
+      { "label": "Registered office", "value": "Maria Schmolln 9, 5241 Maria Schmolln, Austria" },
       { "label": "Trade licence (Gewerbe)", "value": "Small-transport trade / freight transport up to 2,5 t hzG" },
       { "label": "Company register number (GISA)", "value": "00000000" },
       { "label": "VAT number (UID)", "value": "ATU00000000" },
       { "label": "Member", "value": "WKO Oberösterreich, Fachgruppe Güterbeförderung" },
-      { "label": "Insurance", "value": "Transport insurance, policy 000-0000000" },
       { "label": "Supervisory authority", "value": "Bezirkshauptmannschaft Braunau am Inn" },
-      { "label": "Contact", "value": "+43 000 000 00 00 · office@innviertel-express.at" }
+      { "label": "Contact", "value": "+43 000 000 00 00 · info@innexp.at" }
     ]
   },
   "whatsapp": {
