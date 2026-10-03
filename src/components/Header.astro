@@ -1,7 +1,7 @@
 ---
 import logoSrc from '../assets/logo.svg';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
-import { getT, localizePath, whatsappHref, telHref, type Locale, type PageId } from '../i18n/config';
+import { getT, localizePath, whatsappHref, type Locale, type PageId } from '../i18n/config';
 
 interface Props {
   locale: Locale;
@@ -88,7 +88,7 @@ const whatsappIcon =
       </div>
 
       <div class="mobile-contact">
-        <a class="mobile-contact-link" href={telHref}>{t('common.callCta')} · {t('common.phoneDisplay')}</a>
+        <span class="mobile-contact-link">{t('common.callCta')} · {t('common.phoneDisplay')}</span>
         <a class="mobile-contact-link" href={`mailto:${t('common.email')}`}>{t('common.email')}</a>
       </div>
     </div>

@@ -15,7 +15,7 @@
     "whatsappCta": "Написать в WhatsApp",
     "trackingCta": "Отследить отправление",
     "callCta": "Позвонить",
-    "phoneDisplay": "+43 000 000 00 00",
+    "phoneDisplay": "+43 618 20188526",
     "email": "info@innexp.at",
     "responseClaim": "Ответ обычно в течение 30 минут (пн–сб, 7:00–20:00)",
     "languageSwitcherLabel": "Выбрать язык",
@@ -110,16 +110,16 @@
   "legal": {
     "title": "Импрессум (Impressum)",
     "intro": "Раскрытие информации согласно § 5 ECG и § 14 UGB. Кто открыто показывает свою деятельность, тому нечего скрывать.",
-    "driverNote": "Innviertel Express лично руководит и управляет Puhovskiy Oleh.",
+    "driverNote": "Innviertel Express лично руководит и управляет Oleh Pukhovskyi.",
     "fields": [
-      { "label": "Компания", "value": "Puhovskiy Oleh — Innviertel Express e.U." },
+      { "label": "Компания", "value": "Oleh Pukhovskyi — Innviertel Express e.U." },
       { "label": "Адрес", "value": "Maria Schmolln 9, 5241 Maria Schmolln, Австрия" },
       { "label": "Вид деятельности", "value": "Мелкогрузовые перевозки / грузоперевозки до 2,5 t hzG" },
-      { "label": "Реестр (GISA)", "value": "00000000" },
-      { "label": "Номер плательщика НДС (UID)", "value": "ATU00000000" },
+      { "label": "Реестр (GISA)", "value": "39944504" },
+      { "label": "Номер плательщика НДС (UID)", "value": "ATU83491847" },
       { "label": "Членство", "value": "WKO Oberösterreich, секция грузоперевозок" },
       { "label": "Надзорный орган", "value": "Bezirkshauptmannschaft Braunau am Inn" },
-      { "label": "Контакты", "value": "+43 000 000 00 00 · info@innexp.at" }
+      { "label": "Контакты", "value": "+43 618 20188526 · info@innexp.at" }
     ]
   },
   "whatsapp": {

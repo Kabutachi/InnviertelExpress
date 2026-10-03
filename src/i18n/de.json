@@ -15,7 +15,7 @@
     "whatsappCta": "WhatsApp schreiben",
     "trackingCta": "Sendung verfolgen",
     "callCta": "Anrufen",
-    "phoneDisplay": "+43 000 000 00 00",
+    "phoneDisplay": "+43 618 20188526",
     "email": "info@innexp.at",
     "responseClaim": "Antwort meist innerhalb von 30 Minuten (Mo–Sa, 7–20 Uhr)",
     "languageSwitcherLabel": "Sprache wählen",
@@ -110,16 +110,16 @@
   "legal": {
     "title": "Impressum",
     "intro": "Offenlegung gemäß § 5 ECG und § 14 UGB. Wer sein Gewerbe zeigt, hat nichts zu verstecken.",
-    "driverNote": "Innviertel Express wird von Puhovskiy Oleh persönlich geführt und gefahren.",
+    "driverNote": "Innviertel Express wird von Oleh Pukhovskyi persönlich geführt und gefahren.",
     "fields": [
-      { "label": "Unternehmen", "value": "Puhovskiy Oleh — Innviertel Express e.U." },
+      { "label": "Unternehmen", "value": "Oleh Pukhovskyi — Innviertel Express e.U." },
       { "label": "Sitz", "value": "Maria Schmolln 9, 5241 Maria Schmolln, Österreich" },
       { "label": "Gewerbe", "value": "Kleintransportgewerbe / Güterbeförderung bis 2,5 t hzG" },
-      { "label": "GISA-Zahl", "value": "00000000" },
-      { "label": "UID-Nummer", "value": "ATU00000000" },
+      { "label": "GISA-Zahl", "value": "39944504" },
+      { "label": "UID-Nummer", "value": "ATU83491847" },
       { "label": "Mitglied", "value": "WKO Oberösterreich, Fachgruppe Güterbeförderung" },
       { "label": "Aufsichtsbehörde", "value": "Bezirkshauptmannschaft Braunau am Inn" },
-      { "label": "Kontakt", "value": "+43 000 000 00 00 · info@innexp.at" }
+      { "label": "Kontakt", "value": "+43 618 20188526 · info@innexp.at" }
     ]
   },
   "whatsapp": {

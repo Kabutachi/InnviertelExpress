@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logoSrc from '../../assets/logo-night.png';
-import { getT, telHref, type Locale } from '../../i18n/config';
+import { getT, type Locale } from '../../i18n/config';
 
 interface Props {
   locale: Locale;
@@ -22,12 +22,11 @@ const t = getT(locale);
     <nav class="footer-nav" aria-label={t('new.nav.contact')}>
       <a class="link" href="#fahrzeug">{t('new.nav.vehicle')}</a>
       <a class="link" href="#situationen">{t('new.nav.cases')}</a>
-      <a class="link" href="#tracking">{t('common.trackingCta')}</a>
       <a class="link" href="#impressum">{t('footer.impressumLink')}</a>
     </nav>
 
     <div class="footer-contact">
-      <a class="link" href={telHref}>{t('common.phoneDisplay')}</a>
+      <span>{t('common.phoneDisplay')}</span>
       <a class="link" href={`mailto:${t('common.email')}`}>{t('common.email')}</a>
     </div>
   </div>

@@ -56,9 +56,7 @@ export function getStaticLocaleParams() {
   ];
 }
 
-// TODO(client): replace placeholder number 43000000000 everywhere before launch.
-export const whatsappNumber = '43000000000';
-export const telHref = 'tel:+43000000000';
+export const whatsappNumber = '4368120925020';
 
 export function whatsappHref(locale: Locale): string {
   const t = getT(locale);

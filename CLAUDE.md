@@ -30,4 +30,4 @@ A feature request generally means "the day page" unless `/new` is mentioned expl
 
 ## Placeholder data still in the repo
 
-`src/i18n/*.json` → `legal.fields`: GISA number, UID, phone number (`+43 000 000 00 00`), email domain are still placeholders pending real business registration details. Check before launch.
+Owner name, address, GISA, UID and email (`info@innexp.at`) are real. Two separate phone numbers by design: WhatsApp (`whatsappNumber` in `src/i18n/config.ts`, drives every `wa.me` link, the primary contact channel) and a call number shown as plain text only (`common.phoneDisplay` and the `legal.fields` contact row) — it is deliberately not a `tel:` link anywhere. Still placeholder: testimonials copy, and anything else flagged `TODO(client)` in the source.
