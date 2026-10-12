@@ -8,7 +8,7 @@ import '@fontsource/martian-mono/400.css';
 import '@fontsource/martian-mono/600.css';
 import '../styles/night/tokens.css';
 import '../styles/night/night.css';
-import { getT, locales, localizePath, type Locale, type PageId } from '../i18n/config';
+import { getT, langTags, locales, localizePath, type Locale, type PageId } from '../i18n/config';
 
 interface Props {
   locale: Locale;
@@ -21,7 +21,7 @@ const t = getT(locale);
 const site = Astro.site ?? new URL('https://innviertel-express.at');
 const absolute = (l: Locale) => new URL(localizePath(l, page), site).href;
 
-const ogLocales: Record<Locale, string> = { de: 'de_AT', en: 'en_US', ru: 'ru_RU', uk: 'uk_UA' };
+const ogLocales: Record<Locale, string> = { de: 'de_AT', en: 'en_US', ru: 'ru_RU', ua: 'uk_UA' };
 
 // Hint bar data: each locale's "also available" line, written in its own language.
 const hintData = Object.fromEntries(
@@ -41,7 +41,7 @@ const hintData = Object.fromEntries(
 ---
 
 <!doctype html>
-<html lang={locale}>
+<html lang={langTags[locale]}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -53,7 +53,7 @@ const hintData = Object.fromEntries(
     <meta name="description" content={t(`new.meta.description`)} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={absolute(locale)} />
-    {locales.map((l) => <link rel="alternate" hreflang={l} href={absolute(l)} />)}
+    {locales.map((l) => <link rel="alternate" hreflang={langTags[l]} href={absolute(l)} />)}
     <link rel="alternate" hreflang="x-default" href={absolute('de')} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={t('common.brand')} />
@@ -96,7 +96,8 @@ const hintData = Object.fromEntries(
       if (hint && !localStorage.getItem(CHOICE_KEY) && !localStorage.getItem(DISMISS_KEY)) {
         const current = hint.dataset.currentLocale;
         const hints = JSON.parse(hint.dataset.hints ?? '{}');
-        const browser = (navigator.language || '').slice(0, 2).toLowerCase();
+        const lang = (navigator.language || '').slice(0, 2).toLowerCase();
+        const browser = lang === 'uk' ? 'ua' : lang;
         if (browser !== current && hints[browser]) {
           const data = hints[browser];
           hint.querySelector('.locale-hint-text')!.textContent = data.text;

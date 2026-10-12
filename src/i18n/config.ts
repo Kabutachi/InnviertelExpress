@@ -1,17 +1,20 @@
 import de from './de.json';
 import en from './en.json';
 import ru from './ru.json';
-import uk from './uk.json';
+import ua from './ua.json';
 
-export const locales = ['de', 'en', 'ru', 'uk'] as const;
+export const locales = ['de', 'en', 'ru', 'ua'] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = 'de';
+
+// URL segment and file names use the country code `ua`; <html lang>, hreflang and og:locale need the language tag `uk`.
+export const langTags: Record<Locale, string> = { de: 'de', en: 'en', ru: 'ru', ua: 'uk' };
 
 // 'new' is the NACHTSCHICHT redesign, served in parallel at /new for comparison.
 // TODO(client): once a design is chosen, promote it to 'home' and drop this entry.
 export type PageId = 'home' | 'new';
 
-const dictionaries: Record<Locale, Record<string, unknown>> = { de, en, ru, uk };
+const dictionaries: Record<Locale, Record<string, unknown>> = { de, en, ru, ua };
 
 function lookup(locale: Locale, key: string): unknown {
   let node: unknown = dictionaries[locale];
@@ -52,7 +55,7 @@ export function getStaticLocaleParams() {
     { params: { locale: undefined } },
     { params: { locale: 'en' } },
     { params: { locale: 'ru' } },
-    { params: { locale: 'uk' } },
+    { params: { locale: 'ua' } },
   ];
 }
 

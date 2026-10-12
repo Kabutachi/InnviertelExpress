@@ -11,13 +11,17 @@ const t = getT(locale);
 const trustItems = getRaw<{ title: string; text: string }[]>(locale, 'home.trust.items');
 
 // Not translatable content, so kept alongside the markup rather than in i18n JSON.
+// Order matches home.trust.items: direct line to the driver, pickup in hours, nights/weekends, custom loads.
 const trustIcons = [
-  'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Zm0-15v5l3.5 2', // clock — fast, around the clock
-  'M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z|M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z', // pin — trackable
+  'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z', // chat bubble — direct line
+  'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Zm0-15v5l3.5 2', // clock — pickup in hours
+  'M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z', // moon — nights and weekends
+  'M4 21v-7|M4 10V3|M12 21v-9|M12 8V3|M20 21v-5|M20 12V3|M1 14h6|M9 8h6|M17 16h6', // sliders — custom
 ];
 ---
 
 <section class="trust-block section" data-reveal="left">
+  <video class="trust-video" src="/video/night-drive.mp4" poster="/video/night-drive-poster.jpg" preload="none" muted playsinline aria-hidden="true" tabindex="-1"></video>
   <div class="container">
     <h2 class="trust-title">{t('home.trust.title')}</h2>
   </div>
@@ -39,6 +43,27 @@ const trustIcons = [
 </section>
 
 <style>
+  .trust-block {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .trust-block .container {
+    position: relative;
+  }
+
+  .trust-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.48;
+    filter: blur(1px);
+    transform: scale(1.04);
+    pointer-events: none;
+  }
+
   .trust-scroller {
     display: flex;
     gap: var(--space-4);

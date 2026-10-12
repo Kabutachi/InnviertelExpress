@@ -17,7 +17,7 @@
     "callCta": "Anrufen",
     "phoneDisplay": "+43 618 20188526",
     "email": "info@innexp.at",
-    "responseClaim": "Antwort meist innerhalb von 30 Minuten (Mo–Sa, 7–20 Uhr)",
+    "responseClaim": "Antwort in der Regel innerhalb von 30 Minuten · rund um die Uhr, 24/7",
     "languageSwitcherLabel": "Sprache wählen",
     "hintAvailable": "Diese Seite gibt es auch auf Deutsch",
     "hintOpen": "Wechseln",
@@ -31,13 +31,13 @@
   },
   "home": {
     "hero": {
-      "title": "Schnell. Flexibel. Direkt. 24/7.",
-      "subtitle": "Europaweiter Express-Transport bis 700 kg / 2 Europaletten",
+      "title": "Schnell. Flexibel. 24/7.",
+      "subtitle": "Europaweiter Express-Transport",
       "pickupLabel": "Abholung:",
       "pickupAreas": "Oberösterreich · Salzburg · Bayern",
       "deliveryLabel": "Zustellung:",
       "deliveryArea": "ganz Europa",
-      "photoAlt": "Der Fahrer von Innviertel Express vor seinem Fiat Doblo Cargo"
+      "photoAlt": "Der Fiat Doblo Cargo von Innviertel Express auf einem Parkplatz am Park"
     },
     "numbers": {
       "title": "Der Transporter",
@@ -50,20 +50,27 @@
       "items": [
         { "label": "Nutzlast", "value": "700 kg" },
         { "label": "Laderaum", "value": "4,2 m³" },
-        { "label": "Europaletten", "value": "2" },
-        { "label": "Antwortzeit", "value": "~30 min" }
+        { "label": "Europaletten", "value": "2 x" }
       ]
     },
     "trust": {
-      "title": "Womit Sie rechnen können",
+      "title": "Warum wir schneller und flexibler sind",
       "items": [
         {
-          "title": "Schnell & rund um die Uhr",
-          "text": "Anfragen werden zügig bearbeitet — auch außerhalb der üblichen Bürozeiten."
+          "title": "Direkter Draht zum Fahrer",
+          "text": "Ihre Anfrage geht per WhatsApp direkt an den Fahrer. Kein Callcenter, keine Weiterleitung: Sie bekommen schnell eine klare Antwort."
         },
         {
-          "title": "Sendungen nachverfolgbar",
-          "text": "Sie erfahren, wo sich Ihre Sendung gerade befindet und wann sie ankommt."
+          "title": "Abholung in wenigen Stunden",
+          "text": "Kurzfristige Abholung in Oberösterreich, Salzburg und Bayern, wenn es sein muss innerhalb weniger Stunden."
+        },
+        {
+          "title": "Auch nachts und am Wochenende",
+          "text": "Fahrten und Antworten sind nicht an Bürozeiten gebunden: nachts, am Wochenende und an Feiertagen."
+        },
+        {
+          "title": "Klein, aber nach Maß",
+          "text": "Ein Paket bis zu 2 Europaletten. Abholzeit, Zustellfenster und Route legen Sie fest — kein fester Fahrplan, kein Mindestauftragswert."
         }
       ]
     },

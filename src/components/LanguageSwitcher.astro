@@ -1,5 +1,5 @@
 ---
-import { getT, locales, localizePath, type Locale, type PageId } from '../i18n/config';
+import { getT, langTags, locales, localizePath, type Locale, type PageId } from '../i18n/config';
 
 interface Props {
   locale: Locale;
@@ -13,7 +13,7 @@ const nativeNames: Record<Locale, string> = {
   de: 'Deutsch',
   en: 'English',
   ru: 'Русский',
-  uk: 'Українська',
+  ua: 'Українська',
 };
 ---
 
@@ -22,8 +22,8 @@ const nativeNames: Record<Locale, string> = {
     locales.map((l) => (
       <a
         href={localizePath(l, page)}
-        lang={l}
-        hreflang={l}
+        lang={langTags[l]}
+        hreflang={langTags[l]}
         data-locale-choice={l}
         aria-current={l === locale ? 'page' : undefined}
         aria-label={nativeNames[l]}

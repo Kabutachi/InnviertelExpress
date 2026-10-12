@@ -12,263 +12,207 @@ interface Props {
 const { locale } = Astro.props;
 const t = getT(locale);
 
-const numbers = getRaw<{ label: string; value: string }[]>(locale, 'home.numbers.items');
-const photoAlts = getRaw<string[]>(locale, 'home.numbers.photoAlts');
 const photos = [bayRear, baySide, vanSide];
+const photoAlts = getRaw<string[]>(locale, 'home.numbers.photoAlts');
+const photoSizes = ['(min-width: 720px) 58vw, 92vw', '(min-width: 720px) 38vw, 92vw', '(min-width: 720px) 38vw, 92vw'];
 
-// Not translatable content, so kept alongside the markup rather than in i18n JSON.
-// Order matches home.numbers.items: payload, load space, euro-pallets, response time.
-const numberIcons = [
-  'M6 7v10M18 7v10M2 10v4M22 10v4M6 12h12', // dumbbell — payload
-  'M21 8 12 3 3 8v8l9 5 9-5V8Z|M3 8l9 5 9-5|M12 13v8', // cube — load space
-  'M12 2 2 7l10 5 10-5-10-5Z|m2 12 10 5 10-5|m2 17 10 5 10-5', // layers — euro-pallets
-  'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Zm0-15v5l3.5 2', // clock — response time
-];
+const specs = getRaw<{ label: string; value: string }[]>(locale, 'home.numbers.items').map((item) => {
+  const [figure, unit = ''] = item.value.split(' ');
+  return { label: item.label, figure, unit, decimals: figure.includes(',') ? 1 : 0, count: figure.replace(',', '.') };
+});
 ---
 
-<section id="fahrzeug" class="vehicle section" data-reveal="right">
-  <div class="container">
-    <div class="vehicle-grid">
-      <div class="bay-carousel" data-carousel>
-        <div class="carousel-viewport">
-          <ul class="carousel-track" data-track>
-            {
-              photos.map((photo, i) => (
-                <li class="carousel-slide">
-                  <figure class="bay">
-                    <Image
-                      src={photo}
-                      alt={photoAlts[i]}
-                      widths={[380, 560, 760, 1085]}
-                      sizes="(min-width: 1000px) 34vw, (min-width: 640px) 60vw, 92vw"
-                      loading={i === 0 ? 'eager' : 'lazy'}
-                    />
-                  </figure>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
+<section id="fahrzeug" class="van">
+  <div class="container" data-reveal="right">
+    <h2 class="van-h2">{t('home.numbers.subtitle')}</h2>
 
-        <div class="carousel-dots" data-dots>
-          {
-            photos.map((_, i) => (
-              <button type="button" class="carousel-dot" data-dot={i} aria-label={photoAlts[i]} aria-current={i === 0 ? 'true' : 'false'} />
-            ))
-          }
-        </div>
-      </div>
+    <dl class="van-specs" data-van-specs>
+      {
+        specs.map((spec) => (
+          <div class="van-spec">
+            <dt>{spec.label}</dt>
+            <dd>
+              <span data-count={spec.count} data-dec={spec.decimals}>{spec.figure}</span>{spec.unit && <small>{spec.unit}</small>}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
 
-      <div class="vehicle-copy">
-        <h2>{t('home.numbers.title')}</h2>
-        <p class="vehicle-subtitle muted">{t('home.numbers.subtitle')}</p>
-        <div class="numbers-strip">
-          {
-            numbers.map((item, i) => (
-              <div class="numbers-cell">
-                <svg class="numbers-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                  {numberIcons[i].split('|').map((d) => <path d={d} />)}
-                </svg>
-                <p class="figure numbers-value">{item.value}</p>
-                <p class="numbers-label muted">{item.label}</p>
-              </div>
-            ))
-          }
-        </div>
-      </div>
+    <div class="van-shots">
+      {
+        photos.map((photo, i) => (
+          <figure class="van-photo">
+            <Image src={photo} alt={photoAlts[i]} widths={[480, 760, 960]} sizes={photoSizes[i]} loading="lazy" />
+          </figure>
+        ))
+      }
     </div>
   </div>
 </section>
 
 <script>
-  const INTERVAL = 4000;
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const specs = document.querySelector<HTMLElement>('[data-van-specs]');
 
-  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
-    const track = root.querySelector<HTMLElement>('[data-track]');
-    const dots = [...root.querySelectorAll<HTMLButtonElement>('[data-dot]')];
-    if (!track || dots.length === 0) return;
-
-    const count = dots.length;
-    let index = 0;
-    let timer: number | undefined;
-
-    const apply = () => {
-      track.style.transform = `translateX(-${index * 100}%)`;
-      dots.forEach((dot, i) => dot.setAttribute('aria-current', i === index ? 'true' : 'false'));
+  const count = (el: HTMLElement) => {
+    const end = Number(el.dataset.count);
+    const decimals = Number(el.dataset.dec ?? 0);
+    const duration = 900;
+    let start = 0;
+    const step = (now: number) => {
+      if (!start) start = now;
+      const p = Math.min((now - start) / duration, 1);
+      el.textContent = (end * (1 - Math.pow(1 - p, 3))).toFixed(decimals).replace('.', ',');
+      if (p < 1) requestAnimationFrame(step);
     };
+    requestAnimationFrame(step);
+  };
 
-    const go = (next: number) => {
-      index = (next + count) % count;
-      apply();
-    };
-
-    const start = () => {
-      if (reduceMotion.matches || timer !== undefined) return;
-      timer = window.setInterval(() => go(index + 1), INTERVAL);
-    };
-
-    const stop = () => {
-      if (timer !== undefined) {
-        clearInterval(timer);
-        timer = undefined;
-      }
-    };
-
-    dots.forEach((dot, i) =>
-      dot.addEventListener('click', () => {
-        go(i);
-        stop();
-        start();
-      })
+  if (specs && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.querySelectorAll<HTMLElement>('[data-count]').forEach(count);
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.3 }
     );
-
-    root.addEventListener('pointerenter', stop);
-    root.addEventListener('pointerleave', start);
-    root.addEventListener('focusin', stop);
-    root.addEventListener('focusout', start);
-
-    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
-    reduceMotion.addEventListener('change', () => (reduceMotion.matches ? stop() : start()));
-
-    apply();
-    start();
-  });
+    observer.observe(specs);
+  }
 </script>
 
 <style>
-  .vehicle-grid {
+  .van {
+    --van-bg: #f5f2ea;
+    --van-ink: #191511;
+    --van-muted: #71685a;
+    --van-border: #dfd7c7;
+    --van-red: #c22410;
+    --van-r2: 10px;
+    --van-hard: 4px 4px 0 rgba(25, 21, 17, 0.12);
+
+    border-bottom: 1px solid var(--van-border);
+    padding: 72px 0;
+  }
+
+  .van-h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--van-ink);
+    font-size: clamp(34px, 5.2vw, 60px);
+    line-height: 1.02;
+    letter-spacing: -0.005em;
+    margin: 14px 0 0;
+    text-wrap: balance;
+  }
+
+  .van-specs {
     display: grid;
-    gap: var(--space-5);
-    align-items: center;
-  }
-
-  .bay-carousel {
-    position: relative;
-  }
-
-  .carousel-viewport {
+    grid-template-columns: 1fr;
+    margin: 32px 0 0;
+    border: 1px solid var(--van-ink);
+    border-radius: var(--van-r2);
     overflow: hidden;
-    border-radius: var(--radius-m);
-    box-shadow: var(--shadow-crate);
+    background: var(--van-bg);
   }
 
-  .carousel-track {
+  .van-spec {
+    padding: 18px 18px 16px;
     display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
   }
 
-  .carousel-slide {
-    flex: 0 0 100%;
-    min-width: 0;
+  .van-spec + .van-spec {
+    border-top: 1px solid var(--van-ink);
   }
 
-  .bay {
+  .van-spec dt {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--van-muted);
+  }
+
+  .van-spec dd {
     margin: 0;
-    aspect-ratio: 3 / 4;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--van-ink);
+    font-size: clamp(40px, 10vw, 76px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .van-spec dd small {
+    font-size: 0.36em;
+    font-weight: 500;
+    letter-spacing: 0;
+    color: var(--van-red);
+  }
+
+  .van-shots {
+    display: grid;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .van-photo {
+    position: relative;
     overflow: hidden;
+    margin: 0;
+    border: 1px solid var(--van-border);
+    border-radius: var(--van-r2);
+    background-color: #e9e2d3;
+    background-image: repeating-linear-gradient(135deg, rgba(25, 21, 17, 0.045) 0 2px, transparent 2px 16px);
+    box-shadow: var(--van-hard);
+    min-height: 230px;
   }
 
-  .bay :global(img) {
-    display: block;
+  .van-photo :global(img) {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: var(--space-2);
-    margin-top: var(--space-3);
-  }
-
-  .carousel-dot {
-    width: var(--touch-target);
-    height: var(--touch-target);
-    padding: 0;
-    border: none;
-    background: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .carousel-dot::before {
-    content: '';
-    width: 9px;
-    height: 9px;
-    border-radius: 999px;
-    background: var(--color-border);
-    transition: background-color 200ms ease, transform 200ms ease;
-  }
-
-  .carousel-dot:hover::before {
-    background: var(--color-text-muted);
-  }
-
-  .carousel-dot[aria-current='true']::before {
-    background: var(--gradient-speed);
-    transform: scale(1.35);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .carousel-track {
-      transition: none;
-    }
-  }
-
-  .vehicle-subtitle {
-    margin-top: var(--space-1);
-    margin-bottom: var(--space-4);
-  }
-
-  .numbers-strip {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--color-border);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-m);
-    box-shadow: var(--shadow-crate);
-    overflow: hidden;
-  }
-
-  .numbers-cell {
-    background: var(--color-surface);
-    padding: var(--space-4);
-    text-align: center;
-  }
-
-  .numbers-icon {
-    width: 24px;
-    height: 24px;
-    color: var(--color-accent-1);
-    margin-inline: auto;
-    margin-bottom: var(--space-2);
-  }
-
-  .numbers-value {
-    font-size: var(--text-figure);
-    margin: 0 0 var(--space-1);
-  }
-
-  .numbers-label {
-    font-size: var(--text-small);
-    margin: 0;
-  }
-
-  @media (min-width: 1000px) {
-    .vehicle-grid {
-      grid-template-columns: 0.85fr 1fr;
-      gap: var(--space-6);
+  @media (min-width: 720px) {
+    .van {
+      padding: 104px 0;
     }
 
-    .numbers-strip {
-      grid-template-columns: repeat(4, 1fr);
+    .van-specs {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .van-spec {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 28px;
+      padding: 24px 24px 26px;
+    }
+
+    .van-spec + .van-spec {
+      border-top: 0;
+      border-left: 1px solid var(--van-ink);
+    }
+
+    .van-shots {
+      grid-template-columns: 1.5fr 1fr;
+      grid-template-rows: 1fr 1fr;
+    }
+
+    .van-shots .van-photo:first-child {
+      grid-row: 1 / span 2;
+      min-height: 480px;
     }
   }
 </style>

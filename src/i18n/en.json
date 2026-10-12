@@ -17,7 +17,7 @@
     "callCta": "Call",
     "phoneDisplay": "+43 618 20188526",
     "email": "info@innexp.at",
-    "responseClaim": "Usually replies within 30 minutes (Mon–Sat, 7am–8pm)",
+    "responseClaim": "Usually replies within 30 minutes · around the clock, 24/7",
     "languageSwitcherLabel": "Choose language",
     "hintAvailable": "This page is also available in English",
     "hintOpen": "Switch",
@@ -31,13 +31,13 @@
   },
   "home": {
     "hero": {
-      "title": "Fast. Flexible. Direct. 24/7.",
-      "subtitle": "Europe-wide express transport up to 700 kg / 2 Euro-pallets",
+      "title": "Fast. Flexible. 24/7.",
+      "subtitle": "Europe-wide express transport",
       "pickupLabel": "Pickup:",
       "pickupAreas": "Upper Austria · Salzburg · Bavaria",
       "deliveryLabel": "Delivery:",
       "deliveryArea": "all over Europe",
-      "photoAlt": "The Innviertel Express driver in front of his Fiat Doblo Cargo"
+      "photoAlt": "The Innviertel Express Fiat Doblo Cargo parked beside a park"
     },
     "numbers": {
       "title": "The Van",
@@ -50,20 +50,27 @@
       "items": [
         { "label": "Payload", "value": "700 kg" },
         { "label": "Load space", "value": "4,2 m³" },
-        { "label": "Euro-pallets", "value": "2" },
-        { "label": "Response time", "value": "~30 min" }
+        { "label": "Euro-pallets", "value": "2 x" }
       ]
     },
     "trust": {
-      "title": "What you can count on",
+      "title": "Why we are faster and more flexible",
       "items": [
         {
-          "title": "Fast & around the clock",
-          "text": "Requests are handled quickly — even outside regular office hours."
+          "title": "A direct line to the driver",
+          "text": "Your request goes straight to the driver on WhatsApp. No call centre, no hand-offs: you get a clear answer fast."
         },
         {
-          "title": "Shipments trackable",
-          "text": "You'll know where your shipment is right now and when it's arriving."
+          "title": "Pickup within hours",
+          "text": "Short-notice pickup in Upper Austria, Salzburg and Bavaria, within a few hours if it has to be."
+        },
+        {
+          "title": "Nights and weekends too",
+          "text": "Runs and replies aren't tied to office hours: nights, weekends and public holidays."
+        },
+        {
+          "title": "Small, but made to measure",
+          "text": "A single parcel up to 2 Euro-pallets. You set the pickup time, delivery window and route — no fixed timetable, no minimum order."
         }
       ]
     },
