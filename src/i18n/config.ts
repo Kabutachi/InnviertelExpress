@@ -10,9 +10,7 @@ export const defaultLocale: Locale = 'de';
 // URL segment and file names use the country code `ua`; <html lang>, hreflang and og:locale need the language tag `uk`.
 export const langTags: Record<Locale, string> = { de: 'de', en: 'en', ru: 'ru', ua: 'uk' };
 
-// 'new' is the NACHTSCHICHT redesign, served in parallel at /new for comparison.
-// TODO(client): once a design is chosen, promote it to 'home' and drop this entry.
-export type PageId = 'home' | 'new';
+export type PageId = 'home';
 
 const dictionaries: Record<Locale, Record<string, unknown>> = { de, en, ru, ua };
 
@@ -43,7 +41,7 @@ export function resolveLocale(param: string | undefined): Locale {
   return (locales as readonly string[]).includes(param ?? '') ? (param as Locale) : defaultLocale;
 }
 
-const pagePaths: Record<PageId, string> = { home: '', new: 'new' };
+const pagePaths: Record<PageId, string> = { home: '' };
 
 export function localizePath(locale: Locale, page: PageId): string {
   const suffix = pagePaths[page] ? `${pagePaths[page]}/` : '';
