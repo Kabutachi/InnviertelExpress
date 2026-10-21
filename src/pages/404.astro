@@ -1,0 +1,160 @@
+---
+// One 404.html serves every locale (Cloudflare Pages falls back to the root file), so German
+// leads and the other languages follow, each with a link to its own homepage.
+import '../styles/fonts.css';
+import '../styles/tokens.css';
+import '../styles/global.css';
+import logoSrc from '../assets/logo.svg';
+import { getT, langTags, locales, localizePath, whatsappHref } from '../i18n/config';
+
+const t = getT('de');
+const others = locales.filter((l) => l !== 'de').map((l) => ({ locale: l, t: getT(l) }));
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f2ea" />
+    <meta name="robots" content="noindex" />
+    <title>{`${t('notFound.title')} — ${t('common.brand')}`}</title>
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  </head>
+  <body>
+    <main class="container not-found">
+      <a class="logo-link" href={localizePath('de', 'home')}>
+        <img src={logoSrc.src} alt={t('common.brand')} width="216" height="36" />
+      </a>
+
+      <p class="code figure" aria-hidden="true">404</p>
+      <h1>{t('notFound.title')}</h1>
+      <p class="text">{t('notFound.text')}</p>
+
+      <div class="actions">
+        <a class="btn btn-primary" href={localizePath('de', 'home')}>{t('notFound.home')}</a>
+        <a class="btn btn-secondary" href={whatsappHref('de')} rel="noopener">{t('common.whatsappCta')}</a>
+      </div>
+
+      <ul class="others">
+        {
+          others.map(({ locale, t: lt }) => (
+            <li lang={langTags[locale]}>
+              <span class="others-title">{lt('notFound.title')}</span>
+              <a class="link-tick" href={localizePath(locale, 'home')}>
+                {lt('notFound.home')}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </main>
+  </body>
+</html>
+
+<style>
+  .not-found {
+    max-width: 44rem;
+    padding-block: var(--space-6);
+  }
+
+  .logo-link {
+    display: inline-flex;
+    min-height: var(--touch-target);
+    align-items: center;
+  }
+
+  .logo-link img {
+    height: 36px;
+    width: auto;
+  }
+
+  .code {
+    margin-top: var(--space-6);
+    font-size: clamp(4rem, 16vw, 8rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: var(--color-accent-1);
+  }
+
+  h1 {
+    margin-top: var(--space-3);
+    font-size: var(--text-h2);
+  }
+
+  .text {
+    margin-top: var(--space-3);
+    max-width: 50ch;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch-target);
+    padding-inline: var(--space-4);
+    border-radius: var(--radius-s);
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: var(--shadow-crate);
+    transition:
+      box-shadow 200ms ease,
+      transform 200ms ease;
+  }
+
+  .btn:hover,
+  .btn:focus-visible {
+    box-shadow: var(--shadow-crate-lift);
+    transform: translate(-1px, -1px);
+  }
+
+  .btn-primary {
+    background: var(--gradient-speed);
+    color: var(--color-surface);
+  }
+
+  .btn-secondary {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-ink);
+  }
+
+  .others {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .others li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--touch-target);
+    padding-block: var(--space-2);
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--text-small);
+  }
+
+  .others-title {
+    color: var(--color-text-muted);
+  }
+
+  .others a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch-target);
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+</style>

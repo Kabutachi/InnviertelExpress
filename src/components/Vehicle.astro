@@ -43,7 +43,7 @@ const specs = getRaw<{ label: string; value: string }[]>(locale, 'home.numbers.i
       {
         photos.map((photo, i) => (
           <figure class="van-photo">
-            <Image src={photo} alt={photoAlts[i]} widths={[480, 760, 960]} sizes={photoSizes[i]} loading="lazy" />
+            <Image src={photo} alt={photoAlts[i]} widths={[480, 640, 760, 960]} sizes={photoSizes[i]} quality={65} loading="lazy" />
           </figure>
         ))
       }
@@ -132,7 +132,7 @@ const specs = getRaw<{ label: string; value: string }[]>(locale, 'home.numbers.i
 
   .van-spec dt {
     font-family: var(--font-mono);
-    font-weight: 500;
+    font-weight: 700;
     font-size: 13px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -153,7 +153,7 @@ const specs = getRaw<{ label: string; value: string }[]>(locale, 'home.numbers.i
 
   .van-spec dd small {
     font-size: 0.36em;
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: 0;
     color: var(--van-red);
   }

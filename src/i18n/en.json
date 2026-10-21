@@ -15,7 +15,7 @@
     "whatsappCta": "Message on WhatsApp",
     "trackingCta": "Track shipment",
     "callCta": "Call",
-    "phoneDisplay": "+43 618 20188526",
+    "phoneDisplay": "+43 681 20188526",
     "email": "info@innexp.at",
     "responseClaim": "Usually replies within 30 minutes · around the clock, 24/7",
     "languageSwitcherLabel": "Choose language",
@@ -31,6 +31,7 @@
   },
   "home": {
     "hero": {
+      "kicker": "Courier runs in the Innviertel",
       "title": "Fast. Flexible. 24/7.",
       "subtitle": "Europe-wide express transport",
       "pickupLabel": "Pickup:",
@@ -126,12 +127,69 @@
       { "label": "VAT number (UID)", "value": "ATU83491847" },
       { "label": "Member", "value": "WKO Oberösterreich, Fachgruppe Güterbeförderung" },
       { "label": "Supervisory authority", "value": "Bezirkshauptmannschaft Braunau am Inn" },
-      { "label": "Contact", "value": "+43 618 20188526 · info@innexp.at" }
+      { "label": "Contact", "value": "+43 681 20188526 · info@innexp.at" }
     ]
+  },
+  "notFound": {
+    "title": "Page not found",
+    "text": "This address doesn't exist (any more). Your shipment still gets where it's going: start on the homepage or message us on WhatsApp.",
+    "home": "Go to homepage"
   },
   "whatsapp": {
     "prefill": {
       "home": "Hi! I need something transported in the Innviertel: [what] from [place] to [place]. Can you help?"
+    }
+  },
+  "new2": {
+    "map": {
+      "label": "Map of Europe: pickup around the Innviertel, delivery all over Europe, for example to",
+      "origin": "Innviertel",
+      "cities": {
+        "hamburg": "Hamburg",
+        "berlin": "Berlin",
+        "copenhagen": "Copenhagen",
+        "amsterdam": "Amsterdam",
+        "paris": "Paris",
+        "lyon": "Lyon",
+        "zurich": "Zurich",
+        "milan": "Milan",
+        "vienna": "Vienna",
+        "prague": "Prague",
+        "warsaw": "Warsaw",
+        "budapest": "Budapest"
+      }
+    },
+    "timeline": {
+      "title": "One night job, step by step",
+      "note": "An example of how a job can run.",
+      "ctaLead": "Something to move tonight?",
+      "steps": [
+        {
+          "day": "Sun",
+          "time": "22:40",
+          "title": "Request on WhatsApp",
+          "text": "You write straight to the driver: what, from where, to where. No call center, no forwarding."
+        },
+        {
+          "day": "Sun",
+          "time": "22:55",
+          "title": "Reply with price and pickup time",
+          "text": "Usually within 30 minutes, even at this hour."
+        },
+        {
+          "day": "Mon",
+          "time": "01:30",
+          "title": "Pickup in Ried im Innkreis",
+          "text": "One pallet of spare parts goes on board. Pickup within hours, nights included."
+        },
+        {
+          "day": "Mon",
+          "time": "09:00",
+          "title": "Delivered in Milan",
+          "text": "You set the pickup time and the delivery window.",
+          "figure": "approx. 620 km"
+        }
+      ]
     }
   }
 }

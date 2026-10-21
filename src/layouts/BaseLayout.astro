@@ -1,26 +1,55 @@
 ---
-import '@fontsource/fira-sans-condensed/700.css';
-import '@fontsource/fira-sans-condensed/700-italic.css';
-import '@fontsource/source-sans-3/400.css';
-import '@fontsource/source-sans-3/600.css';
-import '@fontsource/jetbrains-mono/500.css';
-import '@fontsource/jetbrains-mono/700.css';
+import '../styles/fonts.css';
 import '../styles/tokens.css';
 import '../styles/global.css';
-import { getT, langTags, locales, localizePath, type Locale, type PageId } from '../i18n/config';
+import { getT, getRaw, langTags, locales, localizePath, businessAddress, vatId, phoneE164, type Locale, type PageId } from '../i18n/config';
 
 interface Props {
   locale: Locale;
   page: PageId;
+  noindex?: boolean;
 }
 
-const { locale, page } = Astro.props;
+const { locale, page, noindex = false } = Astro.props;
 const t = getT(locale);
+const metaPage = getRaw(locale, `meta.${page}`) ? page : 'home';
 
 const site = Astro.site ?? new URL('https://innviertel-express.at');
 const absolute = (l: Locale) => new URL(localizePath(l, page), site).href;
 
 const ogLocales: Record<Locale, string> = { de: 'de_AT', en: 'en_US', ru: 'ru_RU', ua: 'uk_UA' };
+const ogImage = new URL(`/og/og-${locale}.jpg`, site).href;
+const title = t(`meta.${metaPage}.title`);
+const description = t(`meta.${metaPage}.description`);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': new URL('/#business', site).href,
+  name: t('common.brand'),
+  legalName: 'Innviertel Express e.U.',
+  description,
+  url: absolute(locale),
+  image: ogImage,
+  logo: new URL('/apple-touch-icon.png', site).href,
+  telephone: phoneE164(locale),
+  email: t('common.email'),
+  vatID: vatId,
+  address: { '@type': 'PostalAddress', ...businessAddress },
+  areaServed: [
+    { '@type': 'AdministrativeArea', name: 'Innviertel' },
+    { '@type': 'State', name: 'Oberösterreich' },
+    { '@type': 'State', name: 'Salzburg' },
+    { '@type': 'State', name: 'Bayern' },
+  ],
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '00:00',
+    closes: '23:59',
+  },
+  knowsLanguage: locales.map((l) => langTags[l]),
+};
 
 // Hint bar data: each locale's "also available" line, written in its own language.
 const hintData = Object.fromEntries(
@@ -37,19 +66,31 @@ const hintData = Object.fromEntries(
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#f5f2ea" />
-    <title>{t(`meta.${page}.title`)}</title>
-    <meta name="description" content={t(`meta.${page}.description`)} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href={absolute(locale)} />
     {locales.map((l) => <link rel="alternate" hreflang={langTags[l]} href={absolute(l)} />)}
     <link rel="alternate" hreflang="x-default" href={absolute('de')} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={t('common.brand')} />
-    <meta property="og:title" content={t(`meta.${page}.title`)} />
-    <meta property="og:description" content={t(`meta.${page}.description`)} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={t('home.hero.photoAlt')} />
     <meta property="og:url" content={absolute(locale)} />
     <meta property="og:locale" content={ogLocales[locale]} />
     {locales.filter((l) => l !== locale).map((l) => <meta property="og:locale:alternate" content={ogLocales[l]} />)}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    {!noindex && <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />}
   </head>
   <body>
     <a class="skip-link" href="#main">{t('common.skipToContent')}</a>
@@ -126,6 +167,8 @@ const hintData = Object.fromEntries(
         padding: var(--space-2) var(--space-4);
         background: var(--color-ink);
         color: var(--color-bg);
+        /* System font: the hint is usually in another script and must not pull extra webfont subsets. */
+        font-family: system-ui, sans-serif;
         font-size: var(--text-small);
       }
 

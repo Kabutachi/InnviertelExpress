@@ -15,7 +15,7 @@
     "whatsappCta": "WhatsApp schreiben",
     "trackingCta": "Sendung verfolgen",
     "callCta": "Anrufen",
-    "phoneDisplay": "+43 618 20188526",
+    "phoneDisplay": "+43 681 20188526",
     "email": "info@innexp.at",
     "responseClaim": "Antwort in der Regel innerhalb von 30 Minuten · rund um die Uhr, 24/7",
     "languageSwitcherLabel": "Sprache wählen",
@@ -31,6 +31,7 @@
   },
   "home": {
     "hero": {
+      "kicker": "Kurierfahrten im Innviertel",
       "title": "Schnell. Flexibel. 24/7.",
       "subtitle": "Europaweiter Express-Transport",
       "pickupLabel": "Abholung:",
@@ -126,12 +127,69 @@
       { "label": "UID-Nummer", "value": "ATU83491847" },
       { "label": "Mitglied", "value": "WKO Oberösterreich, Fachgruppe Güterbeförderung" },
       { "label": "Aufsichtsbehörde", "value": "Bezirkshauptmannschaft Braunau am Inn" },
-      { "label": "Kontakt", "value": "+43 618 20188526 · info@innexp.at" }
+      { "label": "Kontakt", "value": "+43 681 20188526 · info@innexp.at" }
     ]
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "text": "Diese Adresse gibt es nicht (mehr). Ihre Sendung findet trotzdem ihren Weg: auf der Startseite oder direkt per WhatsApp.",
+    "home": "Zur Startseite"
   },
   "whatsapp": {
     "prefill": {
       "home": "Hallo! Ich brauche einen Transport im Innviertel: [was] von [Ort] nach [Ort]. Geht das bei Ihnen?"
+    }
+  },
+  "new2": {
+    "map": {
+      "label": "Karte von Europa: Abholung rund um das Innviertel, Zustellung in ganz Europa, zum Beispiel nach",
+      "origin": "Innviertel",
+      "cities": {
+        "hamburg": "Hamburg",
+        "berlin": "Berlin",
+        "copenhagen": "Kopenhagen",
+        "amsterdam": "Amsterdam",
+        "paris": "Paris",
+        "lyon": "Lyon",
+        "zurich": "Zürich",
+        "milan": "Mailand",
+        "vienna": "Wien",
+        "prague": "Prag",
+        "warsaw": "Warschau",
+        "budapest": "Budapest"
+      }
+    },
+    "timeline": {
+      "title": "Ein Nachtauftrag, Schritt für Schritt",
+      "note": "Ein Beispiel, wie ein Auftrag ablaufen kann.",
+      "ctaLead": "Heute Nacht etwas zu transportieren?",
+      "steps": [
+        {
+          "day": "So",
+          "time": "22:40",
+          "title": "Anfrage per WhatsApp",
+          "text": "Sie schreiben direkt dem Fahrer: was, von wo, wohin. Kein Callcenter, keine Weiterleitung."
+        },
+        {
+          "day": "So",
+          "time": "22:55",
+          "title": "Antwort mit Preis und Abholzeit",
+          "text": "In der Regel innerhalb von 30 Minuten, auch um diese Uhrzeit."
+        },
+        {
+          "day": "Mo",
+          "time": "01:30",
+          "title": "Abholung in Ried im Innkreis",
+          "text": "Eine Palette Ersatzteile wird geladen. Abholung in wenigen Stunden, auch nachts."
+        },
+        {
+          "day": "Mo",
+          "time": "09:00",
+          "title": "Zugestellt in Mailand",
+          "text": "Abholzeit und Zustellfenster legen Sie fest.",
+          "figure": "ca. 620 km"
+        }
+      ]
     }
   }
 }
