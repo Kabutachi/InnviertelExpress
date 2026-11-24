@@ -1,5 +1,5 @@
 ---
-import { getT, type Locale, type PageId } from '../i18n/config';
+import { getT, telHref, type Locale, type PageId } from '../i18n/config';
 
 interface Props {
   locale: Locale;
@@ -37,7 +37,7 @@ const navItems = [
       <a class="footer-link link-tick" href={`mailto:${t('common.email')}`}>
         {t('common.email')}
       </a>
-      <span class="footer-link">{t('common.callCta')} · {t('common.phoneDisplay')}</span>
+      <a class="footer-link link-tick" href={telHref(locale)}>{t('common.callCta')} · {t('common.phoneDisplay')}</a>
       <p class="footer-claim">{t('common.responseClaim')}</p>
     </div>
   </div>

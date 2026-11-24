@@ -1,0 +1,115 @@
+name: Versioning
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, edited, closed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  branch-name:
+    if: github.event_name == 'pull_request' && github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Check version prefix
+        env:
+          BRANCH: ${{ github.head_ref }}
+        run: node scripts/release/next-version.mjs check "$BRANCH"
+
+  tag:
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.action == 'closed' &&
+      github.event.pull_request.merged == true &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: 0
+          fetch-tags: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      # Lightweight tags carry no tagger, so no bot identity enters the history.
+      # Retrying covers two merges racing for the same version number.
+      - name: Create next version tag
+        env:
+          BRANCH: ${{ github.head_ref }}
+          SHA: ${{ github.event.pull_request.merge_commit_sha }}
+        run: |
+          if [ -n "$(git tag --points-at "$SHA" --list 'v*')" ]; then
+            echo "Commit is already tagged."
+            exit 0
+          fi
+          for attempt in 1 2 3 4 5; do
+            git fetch --force --tags origin
+            TAG="$(node scripts/release/next-version.mjs next "$BRANCH")"
+            git tag "$TAG" "$SHA"
+            if git push origin "refs/tags/$TAG"; then
+              echo "Created $TAG"
+              exit 0
+            fi
+            git tag --delete "$TAG"
+            sleep $((attempt * 2))
+          done
+          echo "Could not push a version tag." >&2
+          exit 1
+
+  release-pr:
+    needs: tag
+    if: >-
+      always() &&
+      ((github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
+      needs.tag.result == 'success')
+    runs-on: ubuntu-latest
+    # A newer pending run replaces an older one, and it describes everything unreleased.
+    concurrency:
+      group: release-pr
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          fetch-tags: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: Create or update release PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$(git rev-list --count origin/prod..origin/main)" = "0" ]; then
+            echo "Production is up to date."
+            exit 0
+          fi
+          TITLE="$(node scripts/release/release-notes.mjs title)"
+          node scripts/release/release-notes.mjs body > "$RUNNER_TEMP/release-body.md"
+          NUMBER="$(gh pr list --base prod --head main --state open --json number --jq '.[0].number // empty')"
+          if [ -n "$NUMBER" ]; then
+            gh api --method PATCH "repos/$GITHUB_REPOSITORY/pulls/$NUMBER" \
+              -f title="$TITLE" -F body=@"$RUNNER_TEMP/release-body.md" --silent
+            echo "Updated PR #$NUMBER"
+          else
+            gh pr create --base prod --head main --title "$TITLE" --body-file "$RUNNER_TEMP/release-body.md"
+          fi

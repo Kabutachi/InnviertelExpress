@@ -10,7 +10,7 @@ export const defaultLocale: Locale = 'de';
 // URL segment and file names use the country code `ua`; <html lang>, hreflang and og:locale need the language tag `uk`.
 export const langTags: Record<Locale, string> = { de: 'de', en: 'en', ru: 'ru', ua: 'uk' };
 
-export type PageId = 'home';
+export type PageId = 'home' | 'new2';
 
 const dictionaries: Record<Locale, Record<string, unknown>> = { de, en, ru, ua };
 
@@ -41,7 +41,7 @@ export function resolveLocale(param: string | undefined): Locale {
   return (locales as readonly string[]).includes(param ?? '') ? (param as Locale) : defaultLocale;
 }
 
-const pagePaths: Record<PageId, string> = { home: '' };
+const pagePaths: Record<PageId, string> = { home: '', new2: 'new2' };
 
 export function localizePath(locale: Locale, page: PageId): string {
   const suffix = pagePaths[page] ? `${pagePaths[page]}/` : '';
@@ -58,6 +58,25 @@ export function getStaticLocaleParams() {
 }
 
 export const whatsappNumber = '4368120925020';
+
+// Structured-data copy of the Impressum address (legal.fields); keep the two in sync.
+export const businessAddress = {
+  streetAddress: 'Maria Schmolln 9',
+  postalCode: '5241',
+  addressLocality: 'Maria Schmolln',
+  addressRegion: 'Oberösterreich',
+  addressCountry: 'AT',
+};
+export const vatId = 'ATU83491847';
+
+// common.phoneDisplay in E.164 form (leading + and digits only), for structured data and tel: links.
+export function phoneE164(locale: Locale): string {
+  return getT(locale)('common.phoneDisplay').replace(/[^\d+]/g, '');
+}
+
+export function telHref(locale: Locale): string {
+  return `tel:${phoneE164(locale)}`;
+}
 
 export function whatsappHref(locale: Locale): string {
   const t = getT(locale);
